@@ -1,3 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@200;300;400;500;600;700&family=Bebas+Neue&display=swap');
 @import 'tailwindcss';
+
+@theme {
+  --color-background: #211f1c;
+  --color-foreground: #f3efe6;
+  --color-surface: #332f2b;
+  --color-surface-2: #413c37;
+  --color-gold: #e9b93f;
+  --color-gold-soft: #c69a33;
+  --color-primary: #e9b93f;
+  --color-primary-foreground: #231f1a;
+  --color-muted: #3b3733;
+  --color-muted-foreground: #b0a99c;
+  --color-accent: #4b4237;
+  --color-border: #4e4842;
+  --color-destructive: #c0442f;
+
+  --font-display: 'Bebas Neue', system-ui, sans-serif;
+  --font-sans: 'Barlow', system-ui, sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background:
+    radial-gradient(110% 80% at 50% -10%, rgba(233, 185, 63, 0.16), transparent 60%),
+    linear-gradient(180deg, #292521 0%, #1c1916 100%);
+  background-color: #231f1b;
+  background-attachment: fixed;
+}
+
+body {
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+}

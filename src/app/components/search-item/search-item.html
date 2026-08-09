@@ -1,0 +1,10 @@
+<div class="w-full py-2 ps-6 rounded-sm hover:bg-gold/20 hover:cursor-pointer" (click)="onSelect()">
+  <div class="flex flex-row items-center gap-4">
+    <img class="max-h-10 object-cover rounded-md" [src]="song().cover" [alt]="song().title" />
+
+    <div>
+      <p class="text-lg font-sans text-foreground font-semibold">{{ song().title }}</p>
+      <p class="text-sm font-sans font-light">{{ song().artist }}</p>
+    </div>
+  </div>
+</div>

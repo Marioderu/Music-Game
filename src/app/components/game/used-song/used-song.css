@@ -1,0 +1,18 @@
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(250px);
+  }
+  80% {
+    border: 0.5px solid var(--color-gold-soft);
+  }
+  100% {
+    opacity: 1;
+    border: 1px solid var(--color-gold);
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.5s ease-out forwards;
+}

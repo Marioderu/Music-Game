@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "Delfines Azules",
+    "img": "img/tribes/delfines.png",
+    "hover": "hover:border-sky-500/60 hover:shadow-sky-500/20",
+    "glowColor": "#38bdf8"
+  },
+  {
+    "id": 2,
+    "name": "Leones del Sol",
+    "img": "img/tribes/leones.png",
+    "hover": "hover:border-amber-500/60 hover:shadow-amber-500/20",
+    "glowColor": "#f59e0b"
+  },
+  {
+    "id": 3,
+    "name": "Loros del Viento",
+    "img": "img/tribes/loros.png",
+    "hover": "hover:border-rose-500/60 hover:shadow-rose-500/20",
+    "glowColor": "#f43f5e"
+  },
+  {
+    "id": 4,
+    "name": "Mariposas de Cristal",
+    "img": "img/tribes/mariposas.png",
+    "hover": "hover:border-purple-500/60 hover:shadow-purple-500/20",
+    "glowColor": "#c084fc"
+  },
+  {
+    "id": 5,
+    "name": "Monos del Bosque",
+    "img": "img/tribes/monos.png",
+    "hover": "hover:border-emerald-500/60 hover:shadow-emerald-500/20",
+    "glowColor": "#34d399"
+  },
+  {
+    "id": 6,
+    "name": "Tortugas de Coral",
+    "img": "img/tribes/tortugas.png",
+    "hover": "hover:border-teal-500/60 hover:shadow-teal-500/20",
+    "glowColor": "#2dd4bf"
+  }
+]

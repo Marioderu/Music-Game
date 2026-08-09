@@ -1,0 +1,13 @@
+<div class="animate-slide-in-right flex flex-row gap-4 bg-surface-2 rounded-2xl">
+  <img
+    class="object-cover max-h-24 rounded-2xl"
+    [src]="song().cover"
+    [alt]="`${song().title} ${song().artist}`"
+  />
+
+  <div class="flex flex-col justify-center gap-2">
+    <p class="font-sans font-bold text-xl text-gold">{{ song().title }}</p>
+
+    <p class="font-sans font-semibold text-foreground">{{ song().artist }}</p>
+  </div>
+</div>

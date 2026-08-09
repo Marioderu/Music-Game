@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "title": "La Graciosa",
+    "artist": "Quevedo",
+    "file": "songs/01-Quevedo-LaGraciosa.mp3",
+    "cover": "img/song-covers/Quevedo-ElBaifo.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Dakiti",
+    "artist": "Bad Bunny",
+    "file": "songs/02-BadBunny-Dakiti.mp3",
+    "cover": "img/song-covers/BadBunny-ElUltimoTourDelMundo.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Superestrella",
+    "artist": "Aitana",
+    "file": "songs/03-Aitana-Superestrella.mp3",
+    "cover": "img/song-covers/Aitana-CuartoAzul.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Agua",
+    "artist": "J Balvin",
+    "file": "songs/04-JBalvin-Agua.mp3",
+    "cover": "img/song-covers/JBalvin-SpongebobMovie.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Soleao",
+    "artist": "Quevedo & Myke Towers",
+    "file": "songs/05-Quevedo&MykeTowers-Soleao.mp3",
+    "cover": "img/song-covers/MykeTowersYQuevedo-Soleao.jpg"
+  },
+  {
+    "id": 6,
+    "title": "Sonriele",
+    "artist": "Daddy Yankee",
+    "file": "songs/06-DaddyYankee-Sonriele.mp3",
+    "cover": "img/song-covers/DaddyYankee-Sonriele.jpg"
+  },
+  {
+    "id": 7,
+    "title": "El Farsante",
+    "artist": "Ozuna",
+    "file": "songs/07-Ozuna-ElFarsante.mp3",
+    "cover": "img/song-covers/Ozuna-Odisea.jpg"
+  },
+  {
+    "id": 8,
+    "title": "La Perla",
+    "artist": "Rosalía",
+    "file": "songs/08-Rosalia-LaPerla.mp3",
+    "cover": "img/song-covers/Rosalia-Lux.jpg"
+  },
+  {
+    "id": 9,
+    "title": "Algo Me Gusta De Ti",
+    "artist": "Wisin & Yandel",
+    "file": "songs/09-Wisin&Yandel-AlgoMeGustaDeTi.mp3",
+    "cover": "img/song-covers/WisinYYandel-Lideres.jpg"
+  },
+  {
+    "id": 10,
+    "title": "Por La Boca Vive El Pez",
+    "artist": "Fito Y Fitipaldis",
+    "file": "songs/10-FitoYFitipaldis-PorLaBocaViveElPez.mp3",
+    "cover": "img/song-covers/FitoYPitipaldis-PorLaBocaViveElPez.jpg"
+  },
+  {
+    "id": 11,
+    "title": "La Raja De Tu Falda",
+    "artist": "Estopa",
+    "file": "songs/11-LaRajaDeTuFalda-Estopa.mp3",
+    "cover": "img/song-covers/Estopa-Estopa.jpg"
+  },
+  {
+    "id": 12,
+    "title": "Zapatillas",
+    "artist": "El Canto Del Loco",
+    "file": "songs/12-ElCantoDelLoco-Zapatillas.mp3",
+    "cover": "img/song-covers/ElCantoDelLoco-Zapatillas.jpg"
+  }
+]

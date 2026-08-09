@@ -1,0 +1,19 @@
+<div>
+  <h2 class="font-sans font-light uppercase text-lg mb-2">Rondas</h2>
+  <div class="flex flex-row gap-1.5">
+    @for (rounds of options; track rounds) {
+      <button
+        type="button"
+        (click)="value.set(rounds)"
+        class="w-10 md:w-15 rounded-xl px-2 py-1.5 transition-all duration-200 hover:cursor-pointer"
+        [class]="
+          value() === rounds
+            ? 'bg-gold text-primary-foreground'
+            : 'bg-muted text-muted-foreground border border-border hover:bg-gold/20'
+        "
+      >
+        {{ rounds }}
+      </button>
+    }
+  </div>
+</div>
