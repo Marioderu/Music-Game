@@ -9,6 +9,7 @@ import { TribeComponent } from '../tribe/tribe';
 import { RoundOption } from './round-option/round-option';
 import { UsedSong } from './used-song/used-song';
 import { TribeScore } from './tribe-score/tribe-score';
+import confetti from 'canvas-confetti';
 
 @Component({
   selector: 'app-game',
@@ -22,6 +23,7 @@ export class GameComponent implements OnInit, OnDestroy {
   readonly state;
   readonly answer;
   readonly usedSongs;
+  readonly tribeScores;
   readonly GamePhase: Record<GamePhase, GamePhase> = {
     notInitialized: 'notInitialized',
     loading: 'loading',
@@ -43,11 +45,44 @@ export class GameComponent implements OnInit, OnDestroy {
     ).slice(0, 5);
   });
   private progressInterval?: number;
+  readonly points = computed(() => {
+    const state = this.state();
+
+    if (state.attempt === 0 || state.guessResult !== 'correct') return 0;
+    if (state.attempt === 1) return 5;
+    if (state.attempt === 2) return 3;
+
+    return 1;
+  });
+  readonly scoreAnimation = signal<{
+    tribeId: number;
+    points: number;
+  } | null>(null);
+  readonly isEndGame = computed(() => {
+    const state = this.state();
+
+    return state.currentRound === this.selectedRounds();
+  });
+  readonly showClassification = signal(false);
+  readonly rankingRevealed = signal(false);
+  readonly ranking = computed(() => {
+    return this.tribes
+      .map((tribe) => ({
+        tribe,
+        score: this.tribeScores()[tribe.id] ?? 0,
+      }))
+      .sort((a, b) => b.score - a.score)
+      .map((item, index) => ({
+        ...item,
+        position: index + 1,
+      }));
+  });
 
   constructor(private gameService: GameService) {
-    this.state = this.gameService.readState;
-    this.answer = this.gameService.answer;
+    this.state = gameService.readState;
+    this.answer = gameService.answer;
     this.usedSongs = gameService.readUsedSongs;
+    this.tribeScores = gameService.tribeScores;
 
     effect(() => {
       const state = this.state();
@@ -80,7 +115,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   onRevealAnswer(): void {
-    this.gameService.revealAnswer();
+    this.gameService.revealAnswer(false);
   }
 
   startProgress(seconds: number) {
@@ -112,6 +147,57 @@ export class GameComponent implements OnInit, OnDestroy {
     this.progressInterval = interval;
   }
 
+  onSearch(event: Event): void {
+    const value = (event.target as HTMLInputElement).value;
+
+    this.search.set(value);
+  }
+
+  onSelectSuggestion(song: Song): void {
+    const guessed = this.gameService.guessSong(song);
+
+    if (guessed) this.celebrate();
+
+    this.search.set('');
+  }
+
+  onEmptySearch(): void {
+    this.search.set('');
+  }
+
+  onAddTribeScore(tribeId: number): void {
+    const points = this.points();
+
+    if (points === 0) return;
+
+    this.gameService.addTribeScore(tribeId, points);
+
+    this.scoreAnimation.set({ tribeId, points });
+
+    setTimeout(() => {
+      this.scoreAnimation.set(null);
+    }, 1000);
+
+    this.onCloseScorePanel();
+  }
+
+  onOpenScorePanel(): void {
+    this.gameService.setScorePanelVisible(true);
+  }
+
+  onCloseScorePanel(): void {
+    this.gameService.setScorePanelVisible(false);
+  }
+
+  onShowClassification(): void {
+    this.gameService.stopAudio();
+    this.showClassification.set(true);
+  }
+
+  revealRanking(): void {
+    this.rankingRevealed.set(true);
+  }
+
   private stopProgress(): void {
     if (this.progressInterval) {
       clearInterval(this.progressInterval);
@@ -121,18 +207,16 @@ export class GameComponent implements OnInit, OnDestroy {
     this.progress.set(0);
   }
 
-  onSearch(event: Event): void {
-    const value = (event.target as HTMLInputElement).value;
-
-    this.search.set(value);
-  }
-
-  onSelectSuggestion(song: Song): void {
-    this.gameService.guessSong(song);
-    this.search.set('');
-  }
-
-  onEmptySearch() {
-    this.search.set('');
+  private celebrate() {
+    confetti({
+      particleCount: 150,
+      spread: 100,
+      startVelocity: 45,
+      origin: {
+        x: 0.5,
+        y: 0.6,
+      },
+      colors: ['#e9b93f', '#f3efe6', '#c69a33', '#ffffff'],
+    });
   }
 }

@@ -9,9 +9,5 @@ import { Tribe } from '../../../models/tribe.model';
 })
 export class TribeScore {
   readonly tribe = input.required<Tribe>();
-  readonly score = signal(0);
-
-  addScore(points: number) {
-    this.score.update((score) => score + points);
-  }
+  readonly score = input.required<number>();
 }

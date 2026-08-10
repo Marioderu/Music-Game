@@ -1,20 +1,60 @@
-<div
-  class="max-w-3xs sm:max-w-2xs group relative flex flex-col items-center overflow-hidden border border-gold-soft bg-background/80 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl rounded-2xl"
-  [ngClass]="tribe().hover"
->
-  <div class="w-full aspect-square overflow-hidden bg-slate-100">
-    <img
-      class="size-full object-cover transition-transform duration-500 group-hover:scale-105"
-      [src]="tribe().img"
-      [alt]="tribe().name"
-    />
-  </div>
+@if (!rankingMode()) {
+  <div
+    class="max-w-3xs sm:max-w-2xs group relative flex flex-col items-center overflow-hidden border border-gold-soft bg-background/80 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl rounded-2xl"
+    [ngClass]="tribe().hover"
+  >
+    <div class="w-full aspect-square overflow-hidden bg-slate-100">
+      <img
+        class="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+        [src]="tribe().img"
+        [alt]="tribe().name"
+      />
+    </div>
 
-  <div class="w-full py-3 px-4 text-center border-t border-stone-800/60 bg-stone-950/50">
-    <p
-      class="text-sm md:text-base lg:text-lg font-bold text-stone-200 transition-colors group-hover:text-gold tracking-wide uppercase"
-    >
-      {{ tribe().name }}
-    </p>
+    <div class="w-full py-3 px-4 text-center border-t border-stone-800/60 bg-stone-950/50">
+      <p
+        class="text-sm md:text-base lg:text-lg font-bold text-stone-200 transition-colors group-hover:text-gold tracking-wide uppercase"
+      >
+        {{ tribe().name }}
+      </p>
+    </div>
   </div>
-</div>
+} @else {
+  <div
+    class="relative aspect-square cursor-pointer perspective-[1000px] rounded-2xl"
+    (click)="toggleReveal()"
+    [ngClass]="position() === 1 && revealed() ? 'winner' : ''"
+  >
+    <div
+      class="relative size-full transition-transform duration-700 transform-3d"
+      [class.rotate-y-180]="revealed()"
+      [style.transition-delay]="revealed() ? 'var(--flip-delay)' : '0ms'"
+    >
+      <!-- CARA TRASERA -->
+      <div
+        class="absolute inset-0 flex flex-col items-center justify-center rounded-2xl border border-gold-soft bg-background backface-hidden"
+      >
+        <span class="font-display text-6xl text-gold">?</span>
+      </div>
+
+      <!-- CARA DELANTERA -->
+      <div
+        class="absolute inset-0 flex flex-col items-center justify-center rounded-2xl border border-gold-soft bg-background backface-hidden rotate-y-180"
+        [style.borderColor]="tribe().glowColor"
+        [ngClass]="getRankStyle()"
+      >
+        <span class="font-display text-4xl"> {{ position() }}º </span>
+
+        <span class="mt-2 font-sans text-xl font-bold uppercase" [style.color]="tribe().glowColor">
+          {{ tribe().name }}
+        </span>
+
+        <span class="mt-4 font-display text-5xl text-foreground">
+          {{ score() }}
+        </span>
+
+        <span class="font-sans text-sm text-muted-foreground"> PUNTOS </span>
+      </div>
+    </div>
+  </div>
+}

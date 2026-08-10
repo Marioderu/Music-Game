@@ -1,6 +1,6 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { Song } from '../models/song.model';
-import { SONGS } from '../data/data';
+import { SONGS, TRIBES } from '../data/data';
 import { AudioService } from './audio.service';
 
 const INITIAL_SECONDS = 2;
@@ -30,6 +30,9 @@ export interface GameState {
   phase: GamePhase;
   correctAnswers: number;
   guessResult: Result;
+  scorePanelVisible: boolean;
+  scorePanelClosing: boolean;
+  addScoreDisabled: boolean;
 }
 
 @Injectable({
@@ -49,7 +52,14 @@ export class GameService {
     phase: 'notInitialized',
     correctAnswers: 0,
     guessResult: null,
+    scorePanelVisible: false,
+    scorePanelClosing: false,
+    addScoreDisabled: false,
   });
+  private tribeScoresSignal = signal<Record<number, number>>(
+    Object.fromEntries(TRIBES.map((tribe) => [tribe.id, 0])),
+  );
+  readonly tribeScores = this.tribeScoresSignal.asReadonly();
   readonly readUsedSongs = this.usedSongs.asReadonly();
   readonly readState = this.stateSignal.asReadonly();
   readonly answer = computed(() => {
@@ -173,18 +183,18 @@ export class GameService {
     }));
   }
 
-  revealAnswer(): void {
+  revealAnswer(guessed: boolean): void {
     this.usedSongs.update((songs) => songs.add(this.stateSignal().currentSong!));
     this.stateSignal.update((state) => ({
       ...state,
       showAnswer: true,
       phase: 'revealed',
-      guessResult: null,
+      addScoreDisabled: !guessed,
     }));
     this.replay(true);
   }
 
-  guessSong(song: Song): void {
+  guessSong(song: Song): boolean {
     if (
       song.title === this.stateSignal().currentSong?.title &&
       song.artist === this.stateSignal().currentSong?.artist
@@ -195,31 +205,74 @@ export class GameService {
         correctAnswers: state.correctAnswers + 1,
         guessResult: 'correct',
       }));
-      this.revealAnswer();
+
+      this.revealAnswer(true);
+      return true;
     } else {
       // Fallo
       this.stateSignal.update((state) => ({
         ...state,
         guessResult: 'incorrect',
       }));
+
+      return false;
     }
   }
 
-  private resetGame(): void {
-    this.usedSongs.set(new Set());
-    this.stateSignal.set({
-      currentSong: null,
-      attempt: 0,
-      currentRound: 1,
-      playSeconds: INITIAL_SECONDS,
-      currentTime: 0,
-      totalSongs: this.songs.length,
-      showAnswer: false,
-      phase: 'notInitialized',
-      correctAnswers: 0,
-      guessResult: null,
-    });
+  addTribeScore(tribeId: number, points: number): void {
+    this.tribeScoresSignal.update((scores) => ({
+      ...scores,
+      [tribeId]: (scores[tribeId] ?? 0) + points,
+    }));
   }
+
+  setScorePanelVisible(visible: boolean): void {
+    if (this.stateSignal().scorePanelVisible !== visible) {
+      if (!visible) {
+        this.stateSignal.update((state) => ({
+          ...state,
+          scorePanelClosing: true,
+          addScoreDisabled: true,
+        }));
+
+        setTimeout(() => {
+          this.stateSignal.update((state) => ({
+            ...state,
+            scorePanelVisible: false,
+          }));
+        }, 150);
+      } else {
+        this.stateSignal.update((state) => ({
+          ...state,
+          scorePanelVisible: true,
+          scorePanelClosing: false,
+        }));
+      }
+    }
+  }
+
+  stopAudio() {
+    this.audioService.stop();
+  }
+
+  // private resetGame(): void {
+  //   this.usedSongs.set(new Set());
+  //   this.stateSignal.set({
+  //     currentSong: null,
+  //     attempt: 0,
+  //     currentRound: 1,
+  //     playSeconds: INITIAL_SECONDS,
+  //     currentTime: 0,
+  //     totalSongs: this.songs.length,
+  //     showAnswer: false,
+  //     phase: 'notInitialized',
+  //     correctAnswers: 0,
+  //     guessResult: null,
+  //     scorePanelVisible: false,
+  //     scorePanelClosing: false,
+  //     addScoreDisabled: false,
+  //   });
+  // }
 
   private resetUsedSongs(): void {
     this.usedSongs.set(new Set());

@@ -1,205 +1,308 @@
-<div class="relative min-h-dvh mx-auto overflow-x-hidden p-8 font-sans">
-  <h1 class="text-center mb-6 uppercase text-7xl font-semibold font-display">
-    Adivina la <span class="text-gold-soft">Canción</span>
-  </h1>
+@if (showClassification()) {
+  <div class="min-h-screen flex items-center justify-center p-6">
+    <div class="w-full max-w-200">
+      <h1 class="text-center font-display text-6xl text-foreground mb-8">
+        Clasificación <span class="text-gold">final</span>
+      </h1>
 
-  @if (state().phase === GamePhase.notInitialized) {
-    <div class="max-w-200 mx-auto">
-      <div class="mb-6">
-        <p class="text-center px-10 font-sans">
-          Empiezas con 2 segundos. Cada vez que necesites más pistas, sumas 2 segundos. <br />
-          A menor número de pistas, más puntos ganados.
-        </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        @for (item of ranking(); track item.tribe.id; let i = $index) {
+          <app-tribe
+            [tribe]="item.tribe"
+            [rankingMode]="true"
+            [position]="item.position"
+            [score]="item.score"
+            [revealed]="rankingRevealed()"
+            [style.--flip-delay]="(ranking().length - 1 - i) * 800 + 'ms'"
+          />
+        }
       </div>
 
-      <div class="text-center px-12 py-4">
-        <div class="mb-10 flex flex-row justify-evenly items-end">
-          <button
-            class="max-h-fit py-4 px-10 text-xl font-sans uppercase text-primary-foreground font-semibold border-0 rounded-lg cursor-pointer transition-all duration-100 ease-in-out hover:scale-105 active:scale-95 bg-gold hover:bg-gold-soft"
-            (click)="onStartGame()"
-          >
-            Iniciar juego
-          </button>
+      <div class="flex justify-center mt-8">
+        <button
+          (click)="revealRanking()"
+          [disabled]="rankingRevealed()"
+          class="px-6 py-3 rounded-xl uppercase bg-gold text-primary-foreground font-bold font-sans enabled:hover:scale-105 transition-transform duration-150 disabled:opacity-50 disabled:cursor-default"
+        >
+          Revelar clasificación
+        </button>
+      </div>
+    </div>
+  </div>
 
-          <app-round-option [(value)]="selectedRounds" />
+  <!-- <div class="min-h-dvh mx-auto overflow-x-hidden p-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      @for (item of ranking(); track item.tribe.id; let i = $index) {
+        <app-tribe
+          [tribe]="item.tribe"
+          [rankingMode]="true"
+          [position]="item.position"
+          [score]="item.score"
+          [revealed]="rankingRevealed()"
+          [style.--flip-delay]="(ranking().length - 1 - i) * 800 + 'ms'"
+        />
+      }
+    </div>
+
+    <button (click)="revealRanking()" [disabled]="rankingRevealed()">Revelar clasificación</button>
+  </div> -->
+} @else {
+  <div class="relative min-h-dvh mx-auto overflow-x-hidden p-8 font-sans">
+    <h1 class="text-center mb-6 uppercase text-7xl font-semibold font-display">
+      Adivina la <span class="text-gold-soft">Canción</span>
+    </h1>
+
+    @if (state().phase === GamePhase.notInitialized) {
+      <div class="max-w-200 mx-auto">
+        <div class="mb-6">
+          <p class="text-center px-10 font-sans">
+            Empiezas con 2 segundos. Cada vez que necesites más pistas, sumas 2 segundos. <br />
+            A menor número de pistas, más puntos ganados.
+          </p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          @for (tribe of tribes; track tribe.id; let i = $index) {
-            <div class="animate-card-entry" [style.animation-delay]="i * 100 + 'ms'">
-              <div
-                class="animate-glow-wave group relative flex flex-col items-center rounded-2xl"
-                [style.--glow-color]="tribe.glowColor"
-                [style.animation-delay]="1 + i * 2 + 's'"
-              >
-                <app-tribe [tribe]="tribe" />
+        <div class="text-center px-12 py-4">
+          <div class="mb-10 flex flex-row justify-evenly items-end">
+            <button
+              class="max-h-fit py-4 px-10 text-xl font-sans uppercase text-primary-foreground font-semibold border-0 rounded-lg cursor-pointer transition-all duration-100 ease-in-out hover:scale-105 active:scale-95 bg-gold hover:bg-gold-soft"
+              (click)="onStartGame()"
+            >
+              Iniciar juego
+            </button>
+
+            <app-round-option [(value)]="selectedRounds" />
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            @for (tribe of tribes; track tribe.id; let i = $index) {
+              <div class="animate-card-entry" [style.animation-delay]="i * 100 + 'ms'">
+                <div
+                  class="animate-glow-wave group relative flex flex-col items-center rounded-2xl"
+                  [style.--glow-color]="tribe.glowColor"
+                  [style.animation-delay]="1 + i * 2 + 's'"
+                >
+                  <app-tribe [tribe]="tribe" />
+                </div>
               </div>
-            </div>
-          }
+            }
+          </div>
         </div>
       </div>
-    </div>
-  } @else {
-    <div class="pointer-events-none absolute inset-x-0 top-32 z-0 opacity-50 px-6">
-      <div class="mx-auto flex justify-between items-start">
-        <div class="w-80 flex flex-col gap-3">
-          @for (song of usedSongs(); track song.id; let i = $index) {
-            <app-used-song [song]="song" />
-          }
+    } @else {
+      <div class="pointer-events-none absolute inset-x-0 top-32 z-0 opacity-50 px-6">
+        <div class="mx-auto flex justify-between items-start">
+          <div class="w-auto flex flex-col gap-3">
+            @for (song of usedSongs(); track song.id; let i = $index) {
+              <app-used-song [song]="song" />
+            }
+          </div>
+
+          <div class="w-80 flex flex-col gap-3">
+            @for (tribe of tribes; track tribe.id; let i = $index) {
+              <div [class.score-added]="scoreAnimation()?.tribeId === tribe.id">
+                <app-tribe-score
+                  [tribe]="tribe"
+                  [score]="tribeScores()[tribe.id]"
+                  [style.animation-delay]="i * 250 + 'ms'"
+                  class="animate-slide-in-left"
+                />
+
+                @if (scoreAnimation()?.tribeId === tribe.id) {
+                  <span class="points-popup" [style.color]="tribe.glowColor">
+                    + {{ scoreAnimation()!.points }}
+                  </span>
+                }
+              </div>
+            }
+          </div>
         </div>
-
-        <div class="w-80 flex flex-col gap-3">
-          @for (tribe of tribes; track tribe.id; let i = $index) {
-            <app-tribe-score [tribe]="tribe" />
-          }
-        </div>
-      </div>
-    </div>
-
-    <div class="max-w-2xl mx-auto bg-primary-foreground border border-border rounded-4xl p-10 z-10">
-      <div class="flex justify-between mb-8 px-4 rounded-lg">
-        <h3 class="text-lg uppercase font-light text-muted-foreground">
-          Intentos: <span class="font-bold text-gold-soft">{{ state().attempt }}</span>
-        </h3>
-
-        <div class="border-e-2 border-e-border"></div>
-
-        <h3 class="text-lg uppercase font-light text-muted-foreground">
-          Ronda:
-          <span class="font-bold text-gold-soft">{{
-            `${state().currentRound} / ${selectedRounds()}`
-          }}</span>
-        </h3>
-
-        <div class="border-e-2 border-e-border"></div>
-
-        <h3 class="text-lg uppercase font-light text-muted-foreground">
-          Aciertos: <span class="font-bold text-gold-soft">{{ state().correctAnswers }}</span>
-        </h3>
       </div>
 
       <div
-        class="size-36 md:size-44 p-3 bg-surface-2 rounded-full mx-auto shadow-[0px_10px_20px] shadow-gold-soft/50"
+        class="relative max-w-2xl mx-auto bg-primary-foreground border border-border rounded-4xl p-10 z-10"
       >
-        <div
-          class="flex flex-col items-center justify-center gap-1 size-full rounded-full border-gold-soft/80 border"
-        >
-          <span class="text-6xl font-bold font-display text-gold">{{ state().playSeconds }}</span>
+        <div class="flex justify-between mb-8 px-4 rounded-lg">
+          <h3 class="text-lg uppercase font-light text-muted-foreground">
+            Intentos: <span class="font-bold text-gold-soft">{{ state().attempt }}</span>
+          </h3>
 
-          <span
-            class="text-xl uppercase font-sans font-extralight tracking-wide text-muted-foreground"
-            >Segundos</span
-          >
+          <div class="border-e-2 border-e-border"></div>
+
+          <h3 class="text-lg uppercase font-light text-muted-foreground">
+            Ronda:
+            <span class="font-bold text-gold-soft">{{
+              `${state().currentRound} / ${selectedRounds()}`
+            }}</span>
+          </h3>
+
+          <div class="border-e-2 border-e-border"></div>
+
+          <h3 class="text-lg uppercase font-light text-muted-foreground">
+            Aciertos: <span class="font-bold text-gold-soft">{{ state().correctAnswers }}</span>
+          </h3>
         </div>
-      </div>
 
-      <div class="w-3/5 h-3 rounded-full bg-gold-soft/60 mx-auto my-8 overflow-hidden mb-8">
-        <div class="h-full w-0 bg-gold" [style.width.%]="progress()"></div>
-      </div>
-
-      <div class="flex gap-4 justify-center flex-wrap mb-6">
-        <button
-          class="flex-1 inline-flex items-center justify-center gap-3 bg-gold text-primary-foreground font-semibold uppercase font-sans tracking-wide px-6 py-3 text-base border-0 rounded-md cursor-pointer transition-[background] duration-200 enabled:hover:scale-105 enabled:hover:transition-transform enabled:hover:duration-400 enabled:hover:ease disabled:cursor-not-allowed disabled:opacity-50"
-          (click)="onListen()"
-          [disabled]="state().showAnswer || state().attempt === 3"
-        >
-          <span class="material-symbols-outlined text-2xl">{{
-            state().attempt === 0 ? 'play_arrow' : 'replay'
-          }}</span>
-          <span>{{ state().attempt === 0 ? 'Escuchar' : 'Más segundos (+2s)' }}</span>
-        </button>
-
-        <button
-          class="flex-1 inline-flex items-center justify-center gap-3 bg-muted text-gold font-semibold uppercase font-sans tracking-wide px-6 py-3 text-base border border-gold rounded-md cursor-pointer transition-[background] duration-200 enabled:hover:bg-gold-soft/10 enabled:hover:scale-105 enabled:hover:transition-transform enabled:hover:duration-400 enabled:hover:ease disabled:cursor-not-allowed disabled:opacity-50"
-          (click)="onNewSong()"
-          [disabled]="!state().showAnswer"
-        >
-          <span class="material-symbols-outlined text-2xl">keyboard_double_arrow_right</span>
-          <span>Nueva canción</span>
-        </button>
-      </div>
-
-      <div class="w-full flex items-center flex-col mx-auto relative">
         <div
-          class="w-full px-4 rounded-full border border-border flex flex-row items-center bg-surface focus-within:border-gold-soft transition-colors duration-200"
+          class="size-36 md:size-44 p-3 bg-surface-2 rounded-full mx-auto shadow-[0px_10px_20px] shadow-gold-soft/50"
         >
-          <span class="material-symbols-outlined text-gold-soft/80"> search </span>
+          <div
+            class="flex flex-col items-center justify-center gap-1 size-full rounded-full border-gold-soft/80 border"
+          >
+            <span class="text-6xl font-bold font-display text-gold">{{ state().playSeconds }}</span>
 
-          <input
-            type="text"
-            placeholder="¿Qué canción está sonando...?"
-            [value]="search()"
-            (input)="onSearch($event)"
-            class="w-full px-4 py-2 bg-surface text-muted-foreground focus:outline-none focus:ring-0 focus:border-transparent disabled:cursor-not-allowed"
-            [disabled]="state().showAnswer"
-          />
+            <span
+              class="text-xl uppercase font-sans font-extralight tracking-wide text-muted-foreground"
+              >Segundos</span
+            >
+          </div>
+        </div>
 
+        <div class="w-3/5 h-3 rounded-full bg-gold-soft/60 mx-auto my-8 overflow-hidden mb-8">
+          <div class="h-full w-0 bg-gold" [style.width.%]="progress()"></div>
+        </div>
+
+        <div class="flex gap-4 justify-center flex-wrap mb-6">
           <button
-            class="inline-flex items-center justify-center text-muted-foreground disabled:cursor-not-allowed disabled:text-muted-foreground/60 hover:cursor-pointer enabled:hover:text-gold-soft"
-            (click)="onEmptySearch()"
-            [disabled]="state().showAnswer"
+            class="flex-1 inline-flex items-center justify-center gap-3 bg-gold text-primary-foreground font-semibold uppercase font-sans tracking-wide px-6 py-3 text-base border-0 rounded-md cursor-pointer transition-[background] duration-200 enabled:hover:scale-105 enabled:hover:transition-transform enabled:hover:duration-400 enabled:hover:ease disabled:cursor-not-allowed disabled:opacity-50"
+            (click)="onListen()"
+            [disabled]="state().showAnswer || state().attempt === 3"
           >
-            <span class="material-symbols-outlined">close</span>
+            <span class="material-symbols-outlined text-2xl">{{
+              state().attempt === 0 ? 'play_arrow' : 'replay'
+            }}</span>
+            <span>{{ state().attempt === 0 ? 'Escuchar' : 'Más segundos (+2s)' }}</span>
           </button>
+
+          @if (isEndGame()) {
+            <button
+              class="flex-1 inline-flex items-center justify-center gap-3 bg-muted text-gold font-semibold uppercase font-sans tracking-wide px-6 py-3 text-base border border-gold rounded-md cursor-pointer transition-[background] duration-200 enabled:hover:bg-gold-soft/10 enabled:hover:scale-105 enabled:hover:transition-transform enabled:hover:duration-400 enabled:hover:ease disabled:cursor-not-allowed disabled:opacity-50"
+              (click)="onShowClassification()"
+              [disabled]="!state().showAnswer"
+            >
+              <span class="material-symbols-outlined text-2xl">rewarded_ads</span>
+              <span>Ver clasificación</span>
+            </button>
+          } @else {
+            <button
+              class="flex-1 inline-flex items-center justify-center gap-3 bg-muted text-gold font-semibold uppercase font-sans tracking-wide px-6 py-3 text-base border border-gold rounded-md cursor-pointer transition-[background] duration-200 enabled:hover:bg-gold-soft/10 enabled:hover:scale-105 enabled:hover:transition-transform enabled:hover:duration-400 enabled:hover:ease disabled:cursor-not-allowed disabled:opacity-50"
+              (click)="onNewSong()"
+              [disabled]="!state().showAnswer"
+            >
+              <span class="material-symbols-outlined text-2xl">keyboard_double_arrow_right</span>
+              <span>Nueva canción</span>
+            </button>
+          }
         </div>
 
-        @if (suggestions().length > 0) {
-          <ul
-            class="w-full max-h-52 overflow-hidden border border-border rounded-lg p-2 absolute top-full mt-2 bg-primary-foreground shadow-gold-soft/20 shadow-[0px_0px_20px_0px]"
+        <div class="w-full flex items-center flex-col mx-auto relative">
+          <div
+            class="w-full px-4 rounded-full border border-border flex flex-row items-center bg-surface focus-within:border-gold-soft transition-colors duration-200"
           >
-            @for (song of suggestions(); track song.id) {
-              <app-search-item [song]="song" [selectSuggestion]="() => onSelectSuggestion(song)" />
-            }
-          </ul>
-        }
-      </div>
+            <span class="material-symbols-outlined text-gold-soft/80"> search </span>
 
-      <div class="w-full border-t-2 border-t-border my-6"></div>
-
-      <div class="w-full my-4">
-        @if (answer()) {
-          <div class="w-full flex flex-row justify-center gap-10 bg-surface rounded-xl py-4">
-            <img
-              class="object-cover max-h-20 rounded-lg"
-              [src]="state().currentSong?.cover"
-              [alt]="`${state().currentSong?.title} ${state().currentSong?.artist}`"
+            <input
+              type="text"
+              placeholder="¿Qué canción está sonando...?"
+              [value]="search()"
+              (input)="onSearch($event)"
+              class="w-full px-4 py-2 bg-surface text-muted-foreground focus:outline-none focus:ring-0 focus:border-transparent disabled:cursor-not-allowed"
+              [disabled]="state().showAnswer"
             />
-            <div class="font-sans flex flex-col gap-2 justify-center">
-              <h3 class="uppercase text-gold font-semibold text-xl">
-                {{ state().currentSong?.title }}
-              </h3>
-              <h4 class="text-muted-foreground">{{ state().currentSong?.artist }}</h4>
+
+            <button
+              class="inline-flex items-center justify-center text-muted-foreground disabled:cursor-not-allowed disabled:text-muted-foreground/60 hover:cursor-pointer enabled:hover:text-gold-soft"
+              (click)="onEmptySearch()"
+              [disabled]="state().showAnswer"
+            >
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </div>
+
+          @if (suggestions().length > 0) {
+            <ul
+              class="w-full max-h-52 overflow-hidden border border-border rounded-lg p-2 absolute top-full mt-2 bg-primary-foreground shadow-gold-soft/20 shadow-[0px_0px_20px_0px]"
+            >
+              @for (song of suggestions(); track song.id) {
+                <app-search-item
+                  [song]="song"
+                  [selectSuggestion]="() => onSelectSuggestion(song)"
+                />
+              }
+            </ul>
+          }
+        </div>
+
+        <div class="w-full border-t-2 border-t-border my-6"></div>
+
+        <div class="w-full my-4">
+          @if (answer()) {
+            <div class="relative w-full flex flex-row justify-between bg-surface rounded-xl p-4">
+              <div class="w-full flex flex-row gap-10">
+                <img
+                  class="object-cover max-h-20 rounded-lg"
+                  [src]="state().currentSong?.cover"
+                  [alt]="`${state().currentSong?.title} ${state().currentSong?.artist}`"
+                />
+                <div class="font-sans flex flex-col gap-2 justify-center">
+                  <h3 class="uppercase text-gold font-semibold text-xl">
+                    {{ state().currentSong?.title }}
+                  </h3>
+                  <h4 class="text-muted-foreground">{{ state().currentSong?.artist }}</h4>
+                </div>
+              </div>
+
+              <button
+                class="group border border-gold-soft/60 text-lg font-semibold font-sans rounded-xl text-muted-foreground w-1/3 cursor-pointer enabled:hover:bg-gold-soft enabled:hover:border-none enabled:hover:text-primary-foreground enabled:hover:scale-105 transition-all duration-150 disabled:cursor-not-allowed disabled:opacity-40"
+                (click)="onOpenScorePanel()"
+                [disabled]="state().addScoreDisabled"
+              >
+                <span class="text-gold text-xl enabled:group-hover:text-primary-foreground"
+                  >+ {{ points() }}</span
+                >
+                puntos
+              </button>
+            </div>
+          } @else {
+            <button
+              class="w-full inline-flex items-center justify-center gap-3 bg-transparent text-muted-foreground font-semibold uppercase font-sans tracking-wide px-6 py-5 text-base border border-muted-foreground border-dashed rounded-lg cursor-pointer transition-all duration-200 ease enabled:hover:text-gold enabled:hover:border-gold enabled:hover:duration-200 enabled:hover:ease disabled:cursor-not-allowed disabled:opacity-50"
+              (click)="onRevealAnswer()"
+              [disabled]="state().showAnswer"
+            >
+              <span class="material-symbols-outlined text-2xl">visibility</span>
+              <span>Mostrar respuesta</span>
+            </button>
+          }
+        </div>
+
+        @if (state().guessResult === 'incorrect') {
+          <div class="text-center px-4 py-3 rounded-lg mx-auto bg-red-800">
+            <h2 class="text-foreground">¡Oops! Esa no era la canción correcta</h2>
+          </div>
+        }
+
+        @if (state().scorePanelVisible) {
+          <div
+            class="panel-in absolute top-1/2 left-1/2 size-7/8 bg-accent px-4 py-6 rounded-4xl"
+            [class.panel-out]="state().scorePanelClosing"
+          >
+            <h2 class="text-center font-display text-3xl text-muted-foreground mb-4">
+              ¿Quién ha acertado?
+            </h2>
+            <div class="grid grid-cols-2 gap-3">
+              @for (tribe of tribes; track tribe.id) {
+                <button
+                  class="h-16 rounded-2xl border border-border bg-surface/50 font-sans font-semibold text-lg text-foreground transition-all duration-150 hover:scale-[1.02] hover:bg-surface-2 cursor-pointer flex items-center justify-center gap-3"
+                  [style.borderColor]="tribe.glowColor"
+                  [style.color]="tribe.glowColor"
+                  (click)="onAddTribeScore(tribe.id)"
+                >
+                  {{ tribe.name }}
+                </button>
+              }
             </div>
           </div>
-        } @else {
-          <button
-            class="w-full inline-flex items-center justify-center gap-3 bg-transparent text-muted-foreground font-semibold uppercase font-sans tracking-wide px-6 py-5 text-base border border-muted-foreground border-dashed rounded-lg cursor-pointer transition-all duration-200 ease enabled:hover:text-gold enabled:hover:border-gold enabled:hover:duration-200 enabled:hover:ease disabled:cursor-not-allowed disabled:opacity-50"
-            (click)="onRevealAnswer()"
-            [disabled]="state().showAnswer"
-          >
-            <span class="material-symbols-outlined text-2xl">visibility</span>
-            <span>Mostrar respuesta</span>
-          </button>
         }
       </div>
-
-      @if (state().guessResult !== null) {
-        <div
-          class="text-center px-4 py-3 rounded-lg mx-auto"
-          [ngClass]="{
-            'bg-green-700': state().guessResult === 'correct',
-            'bg-red-800': state().guessResult === 'incorrect',
-          }"
-        >
-          <h2 class="text-foreground">
-            @if (state().guessResult === 'correct') {
-              ¡Correcto!
-            } @else {
-              ¡Oops! Esa no es la canción correcta
-            }
-          </h2>
-        </div>
-      }
-    </div>
-  }
-</div>
+    }
+  </div>
+}

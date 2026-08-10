@@ -33,6 +33,128 @@
     border-color: rgba(44, 40, 37, 0.8);
   }
 }
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translateX(12px);
+  }
+
+  72% {
+    transform: translateX(-7px);
+  }
+
+  82% {
+    transform: translateX(4px);
+  }
+
+  90% {
+    transform: translateX(-2px);
+  }
+
+  95% {
+    transform: translateX(1px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes panelOut {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.92);
+  }
+}
+
+@keyframes scoreCard {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  30% {
+    transform: scale(1.05);
+    filter: brightness(1.5);
+  }
+  60% {
+    transform: scale(0.98);
+    filter: brightness(1.2);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+@keyframes pointsPopup {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0) scale(0.7);
+  }
+
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -10px) scale(1.15);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -70px) scale(1);
+  }
+}
+
+.points-popup {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: bold;
+
+  pointer-events: none;
+
+  animation: pointsPopup 0.9s ease-out forwards;
+}
+
+.score-added {
+  animation: scoreCard 0.7s ease-out;
+}
+
+.panel-in {
+  animation: panelIn 0.2s ease-out both;
+}
+
+.panel-out {
+  animation: panelOut 0.15s ease-in both;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.7s ease-out both;
+}
 
 .animate-card-entry {
   opacity: 0;
