@@ -2,6 +2,7 @@ export interface Song {
   id: number;
   title: string;
   artist: string;
-  file: string;
+  guess: string;
+  reveal: string;
   cover: string;
 }

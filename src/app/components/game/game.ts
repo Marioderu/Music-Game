@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, signal, effect, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GameService, GamePhase, Round } from '../../services/game.service';
+import { GameService, GamePhase, Round, REVEALED_SECONDS } from '../../services/game.service';
 import { SONGS, TRIBES } from '../../data/data';
 import { SearchItem } from '../search-item/search-item';
 import { Song } from '../../models/song.model';
@@ -10,11 +10,20 @@ import { RoundOption } from './round-option/round-option';
 import { UsedSong } from './used-song/used-song';
 import { TribeScore } from './tribe-score/tribe-score';
 import confetti from 'canvas-confetti';
+import { CarouselCard } from '../carousel-card/carousel-card';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule, SearchItem, TribeComponent, RoundOption, UsedSong, TribeScore],
+  imports: [
+    CommonModule,
+    SearchItem,
+    TribeComponent,
+    RoundOption,
+    UsedSong,
+    TribeScore,
+    CarouselCard,
+  ],
   templateUrl: './game.html',
   styleUrl: './game.css',
 })
@@ -24,6 +33,9 @@ export class GameComponent implements OnInit, OnDestroy {
   readonly answer;
   readonly usedSongs;
   readonly tribeScores;
+  private shuffledSongs;
+  readonly carouselLeft;
+  readonly carouselRight;
   readonly GamePhase: Record<GamePhase, GamePhase> = {
     notInitialized: 'notInitialized',
     loading: 'loading',
@@ -42,7 +54,7 @@ export class GameComponent implements OnInit, OnDestroy {
     return SONGS.filter(
       (song) =>
         song.title.toLowerCase().includes(query) || song.artist.toLowerCase().includes(query),
-    ).slice(0, 5);
+    ).slice(0, 15);
   });
   private progressInterval?: number;
   readonly points = computed(() => {
@@ -77,18 +89,27 @@ export class GameComponent implements OnInit, OnDestroy {
         position: index + 1,
       }));
   });
+  readonly visibleUsedSongs = computed(() => [...this.usedSongs()].slice(-6));
+  readonly hiddenUsedSongs = computed(() => Math.max(0, [...this.usedSongs()].length - 6));
 
   constructor(private gameService: GameService) {
     this.state = gameService.readState;
     this.answer = gameService.answer;
     this.usedSongs = gameService.readUsedSongs;
     this.tribeScores = gameService.tribeScores;
+    this.shuffledSongs = gameService.songs.sort(() => Math.random() - 0.5);
+    const shuffledRight = this.shuffledSongs.slice(0, 6);
+    const shuffledLeft = this.shuffledSongs.slice(6, 12);
+    this.carouselLeft = [...shuffledLeft, ...shuffledLeft]; // TODO: CAMBIAR A (0, 25)
+    this.carouselRight = [...shuffledRight, ...shuffledRight]; // TODO: CAMBIAR A (25, 50)
 
     effect(() => {
       const state = this.state();
 
       if (state.phase === 'listening') {
         this.startProgress(state.playSeconds);
+      } else if (state.phase === 'revealed') {
+        this.startProgress(REVEALED_SECONDS);
       } else {
         this.stopProgress();
       }

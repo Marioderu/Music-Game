@@ -29,23 +29,6 @@
       </div>
     </div>
   </div>
-
-  <!-- <div class="min-h-dvh mx-auto overflow-x-hidden p-8">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      @for (item of ranking(); track item.tribe.id; let i = $index) {
-        <app-tribe
-          [tribe]="item.tribe"
-          [rankingMode]="true"
-          [position]="item.position"
-          [score]="item.score"
-          [revealed]="rankingRevealed()"
-          [style.--flip-delay]="(ranking().length - 1 - i) * 800 + 'ms'"
-        />
-      }
-    </div>
-
-    <button (click)="revealRanking()" [disabled]="rankingRevealed()">Revelar clasificación</button>
-  </div> -->
 } @else {
   <div class="relative min-h-dvh mx-auto overflow-x-hidden p-8 font-sans">
     <h1 class="text-center mb-6 uppercase text-7xl font-semibold font-display">
@@ -53,6 +36,30 @@
     </h1>
 
     @if (state().phase === GamePhase.notInitialized) {
+      <div class="pointer-events-none absolute inset-x-0 z-0 opacity-35 px-10 pt-2">
+        <div class="flex justify-between h-[calc(100vh-8rem)]">
+          <div
+            class="h-full overflow-hidden mask-[linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]"
+          >
+            <div class="animate-carousel-down flex flex-col gap-4">
+              @for (song of carouselLeft; track song.id) {
+                <app-carousel-card [img]="song.cover" [artist]="song.artist" />
+              }
+            </div>
+          </div>
+
+          <div
+            class="h-full overflow-hidden mask-[linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]"
+          >
+            <div class="animate-carousel-up flex flex-col gap-4">
+              @for (song of carouselRight; track song.id) {
+                <app-carousel-card [img]="song.cover" [artist]="song.artist" />
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="max-w-200 mx-auto">
         <div class="mb-6">
           <p class="text-center px-10 font-sans">
@@ -91,13 +98,21 @@
     } @else {
       <div class="pointer-events-none absolute inset-x-0 top-32 z-0 opacity-50 px-6">
         <div class="mx-auto flex justify-between items-start">
-          <div class="w-auto flex flex-col gap-3">
-            @for (song of usedSongs(); track song.id; let i = $index) {
+          <div class="w-88 flex flex-col gap-3">
+            @for (song of visibleUsedSongs(); track song.id; let i = $index) {
               <app-used-song [song]="song" />
+            }
+            @if (hiddenUsedSongs() > 0) {
+              <p
+                class="text-lg font-sans font-semibold text-muted-foreground uppercase text-center tracking-wide"
+              >
+                + {{ hiddenUsedSongs() }}
+                {{ hiddenUsedSongs() === 1 ? 'canción anterior' : 'canciones anteriores' }}
+              </p>
             }
           </div>
 
-          <div class="w-80 flex flex-col gap-3">
+          <div class="w-88 flex flex-col gap-3">
             @for (tribe of tribes; track tribe.id; let i = $index) {
               <div [class.score-added]="scoreAnimation()?.tribeId === tribe.id">
                 <app-tribe-score
@@ -143,7 +158,7 @@
         </div>
 
         <div
-          class="size-36 md:size-44 p-3 bg-surface-2 rounded-full mx-auto shadow-[0px_10px_20px] shadow-gold-soft/50"
+          class="size-36 md:size-44 lg:size-48 p-3 bg-surface-2 rounded-full mx-auto shadow-[0px_10px_20px] shadow-gold-soft/50"
         >
           <div
             class="flex flex-col items-center justify-center gap-1 size-full rounded-full border-gold-soft/80 border"
@@ -165,7 +180,9 @@
           <button
             class="flex-1 inline-flex items-center justify-center gap-3 bg-gold text-primary-foreground font-semibold uppercase font-sans tracking-wide px-6 py-3 text-base border-0 rounded-md cursor-pointer transition-[background] duration-200 enabled:hover:scale-105 enabled:hover:transition-transform enabled:hover:duration-400 enabled:hover:ease disabled:cursor-not-allowed disabled:opacity-50"
             (click)="onListen()"
-            [disabled]="state().showAnswer || state().attempt === 3"
+            [disabled]="
+              state().phase === 'listening' || state().showAnswer || state().attempt === 3
+            "
           >
             <span class="material-symbols-outlined text-2xl">{{
               state().attempt === 0 ? 'play_arrow' : 'replay'
@@ -220,7 +237,7 @@
 
           @if (suggestions().length > 0) {
             <ul
-              class="w-full max-h-52 overflow-hidden border border-border rounded-lg p-2 absolute top-full mt-2 bg-primary-foreground shadow-gold-soft/20 shadow-[0px_0px_20px_0px]"
+              class="w-full max-h-[min(20rem,calc(100dvh-10rem))] overflow-y-auto border border-border rounded-lg px-2 py-1 absolute top-full mt-2 z-10 bg-primary-foreground shadow-gold-soft/20 shadow-[0px_0px_20px_0px]"
             >
               @for (song of suggestions(); track song.id) {
                 <app-search-item
@@ -239,7 +256,7 @@
             <div class="relative w-full flex flex-row justify-between bg-surface rounded-xl p-4">
               <div class="w-full flex flex-row gap-10">
                 <img
-                  class="object-cover max-h-20 rounded-lg"
+                  class="object-cover size-20 shrink-0 rounded-lg"
                   [src]="state().currentSong?.cover"
                   [alt]="`${state().currentSong?.title} ${state().currentSong?.artist}`"
                 />
@@ -256,7 +273,7 @@
                 (click)="onOpenScorePanel()"
                 [disabled]="state().addScoreDisabled"
               >
-                <span class="text-gold text-xl enabled:group-hover:text-primary-foreground"
+                <span class="text-gold text-xl group-enabled:group-hover:text-primary-foreground"
                   >+ {{ points() }}</span
                 >
                 puntos
@@ -266,7 +283,9 @@
             <button
               class="w-full inline-flex items-center justify-center gap-3 bg-transparent text-muted-foreground font-semibold uppercase font-sans tracking-wide px-6 py-5 text-base border border-muted-foreground border-dashed rounded-lg cursor-pointer transition-all duration-200 ease enabled:hover:text-gold enabled:hover:border-gold enabled:hover:duration-200 enabled:hover:ease disabled:cursor-not-allowed disabled:opacity-50"
               (click)="onRevealAnswer()"
-              [disabled]="state().showAnswer"
+              [disabled]="
+                state().phase === 'listening' || state().attempt === 0 || state().showAnswer
+              "
             >
               <span class="material-symbols-outlined text-2xl">visibility</span>
               <span>Mostrar respuesta</span>

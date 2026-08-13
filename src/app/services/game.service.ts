@@ -5,10 +5,8 @@ import { AudioService } from './audio.service';
 
 const INITIAL_SECONDS = 2;
 const SECONDS_INCREMENT = 2;
-const REVEALED_SECONDS = 20;
 const MAX_ATTEMPTS = 3;
-const RANDOM_START_MIN_PERCENT = 0.25;
-const RANDOM_START_MAX_PERCENT = 0.75;
+export const REVEALED_SECONDS = 20;
 
 export type GamePhase = 'notInitialized' | 'loading' | 'listening' | 'waitingAnswer' | 'revealed';
 
@@ -39,7 +37,7 @@ export interface GameState {
   providedIn: 'root',
 })
 export class GameService {
-  private songs: Song[] = [...SONGS];
+  readonly songs: Song[] = [...SONGS];
   private usedSongs = signal<Set<Song>>(new Set());
   private stateSignal = signal<GameState>({
     currentSong: null,
@@ -104,34 +102,26 @@ export class GameService {
     const randomIndex = Math.floor(Math.random() * availableSongs.length);
     const song = availableSongs[randomIndex];
 
-    // this.usedSongs.update((songs) => songs.add(song));
     this.stateSignal.update((state) => ({
       ...state,
       currentSong: song,
       attempt: 0,
       playSeconds: INITIAL_SECONDS,
+      currentTime: 0,
       showAnswer: false,
     }));
 
-    this.audioService.loadSong(song.file);
+    this.audioService.loadSong(song.guess);
 
     await this.waitForDuration();
   }
 
   private async playCurrentSong(): Promise<void> {
-    if (!this.stateSignal().currentSong) return;
+    const state = this.stateSignal();
 
-    if (this.stateSignal().attempt === 1) {
-      this.stateSignal.update((state) => ({
-        ...state,
-        currentTime: this.getRandomStartTime(this.audioService.getDuration()),
-      }));
-    }
+    if (!state.currentSong) return;
 
-    await this.audioService.playFromTimeForSeconds(
-      this.stateSignal().currentTime,
-      this.stateSignal().playSeconds,
-    );
+    await this.audioService.playFromTimeForSeconds(state.currentTime, state.playSeconds);
   }
 
   private waitForDuration(): Promise<void> {
@@ -148,24 +138,20 @@ export class GameService {
     });
   }
 
-  private getRandomStartTime(duration: number): number {
-    if (!duration || isNaN(duration) || duration <= 0) {
-      return 0;
-    }
-    const minStart = duration * RANDOM_START_MIN_PERCENT;
-    const maxStart = duration * RANDOM_START_MAX_PERCENT;
-    return minStart + Math.random() * (maxStart - minStart);
-  }
-
   async replay(revealed: boolean): Promise<void> {
-    if (!this.stateSignal().currentSong || this.stateSignal().phase === 'loading') return;
+    const state = this.stateSignal();
 
-    const nextAttempt = revealed ? this.stateSignal().attempt : this.stateSignal().attempt + 1;
-    const nextPlaySeconds = revealed
-      ? REVEALED_SECONDS
-      : this.stateSignal().attempt === 0
-        ? INITIAL_SECONDS
-        : this.stateSignal().playSeconds + SECONDS_INCREMENT;
+    if (!state.currentSong || state.phase === 'loading') return;
+
+    if (revealed) {
+      await this.playRevealSong();
+      return;
+    }
+
+    if (state.attempt >= MAX_ATTEMPTS) return;
+
+    const nextAttempt = state.attempt + 1;
+    const nextPlaySeconds = nextAttempt * SECONDS_INCREMENT;
 
     this.stateSignal.update((state) => ({
       ...state,
@@ -183,15 +169,27 @@ export class GameService {
     }));
   }
 
-  revealAnswer(guessed: boolean): void {
-    this.usedSongs.update((songs) => songs.add(this.stateSignal().currentSong!));
+  async revealAnswer(guessed: boolean): Promise<void> {
+    const state = this.stateSignal();
+
+    if (!state.currentSong || state.showAnswer) return;
+
+    const song = state.currentSong;
+
+    this.usedSongs.update((songs) => {
+      const newSongs = new Set(songs);
+      newSongs.add(song);
+      return newSongs;
+    });
+
     this.stateSignal.update((state) => ({
       ...state,
       showAnswer: true,
       phase: 'revealed',
       addScoreDisabled: !guessed,
     }));
-    this.replay(true);
+
+    this.playRevealSong();
   }
 
   guessSong(song: Song): boolean {
@@ -273,6 +271,18 @@ export class GameService {
   //     addScoreDisabled: false,
   //   });
   // }
+
+  private async playRevealSong(): Promise<void> {
+    const song = this.stateSignal().currentSong;
+
+    if (!song) return;
+
+    this.audioService.loadSong(song.reveal);
+
+    await this.waitForDuration();
+
+    await this.audioService.playFromTimeForSeconds(0, REVEALED_SECONDS);
+  }
 
   private resetUsedSongs(): void {
     this.usedSongs.set(new Set());

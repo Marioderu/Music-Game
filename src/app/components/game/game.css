@@ -126,6 +126,33 @@
   }
 }
 
+@keyframes carousel-down {
+  from {
+    transform: translateY(-50%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes carousel-up {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-carousel-down {
+  animation: carousel-down 18s linear infinite;
+}
+
+.animate-carousel-up {
+  animation: carousel-up 24s linear infinite;
+}
+
 .points-popup {
   position: absolute;
   left: 50%;
