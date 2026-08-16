@@ -91,6 +91,8 @@ export class GameComponent implements OnInit, OnDestroy {
   });
   readonly visibleUsedSongs = computed(() => [...this.usedSongs()].slice(-6));
   readonly hiddenUsedSongs = computed(() => Math.max(0, [...this.usedSongs()].length - 6));
+  readonly phase = computed(() => this.state().phase)
+  readonly playSeconds = computed(() => this.state().playSeconds)
 
   constructor(private gameService: GameService) {
     this.state = gameService.readState;
@@ -104,11 +106,11 @@ export class GameComponent implements OnInit, OnDestroy {
     this.carouselRight = [...shuffledRight, ...shuffledRight]; // TODO: CAMBIAR A (25, 50)
 
     effect(() => {
-      const state = this.state();
+      const phase = this.phase();
 
-      if (state.phase === 'listening') {
-        this.startProgress(state.playSeconds);
-      } else if (state.phase === 'revealed') {
+      if (phase === 'listening') {
+        this.startProgress(this.playSeconds());
+      } else if (phase === 'revealed') {
         this.startProgress(REVEALED_SECONDS);
       } else {
         this.stopProgress();

@@ -94,5 +94,309 @@
     "guess": "songs/guess/012-ElCantoDelLoco-Zapatillas.mp3",
     "reveal": "songs/reveal/012-ElCantoDelLoco-Zapatillas.mp3",
     "cover": "img/song-covers/ElCantoDelLoco-Zapatillas.jpg"
+  },
+  {
+    "id": 13,
+    "title": "Dai Dai",
+    "artist": "Shakira & Burna Boy",
+    "guess": "songs/guess/013-ShakiraYBurnaBoy-DaiDai.mp3",
+    "reveal": "songs/reveal/013-ShakiraYBurnaBoy-DaiDai.mp3",
+    "cover": "img/song-covers/ShakiraYBurnaBoy-DaiDai.jpg"
+  },
+  {
+    "id": 14,
+    "title": "Waka Waka",
+    "artist": "Shakira",
+    "guess": "songs/guess/014-Shakira-WakaWaka.mp3",
+    "reveal": "songs/reveal/014-Shakira-WakaWaka.mp3",
+    "cover": "img/song-covers/Shakira-WakaWaka.jpg"
+  },
+  {
+    "id": 15,
+    "title": "Despacito",
+    "artist": "Luis Fonsi & Daddy Yankee",
+    "guess": "songs/guess/015-LuisFonsiYDaddyYankee-Vida.mp3",
+    "reveal": "songs/reveal/015-LuisFonsiYDaddyYankee-Vida.mp3",
+    "cover": "img/song-covers/LuisFonsi-Vida.jpg"
+  },
+  {
+    "id": 16,
+    "title": "BZRP Music Sessions, Vol. 52",
+    "artist": "Quevedo & Bizarrap",
+    "guess": "songs/guess/016-QuevedoYBizarrap-BZRPMusicSessionsVol52.mp3",
+    "reveal": "songs/reveal/016-QuevedoYBizarrap-BZRPMusicSessionsVol52.mp3",
+    "cover": "img/song-covers/Quevedo-BZRPMusicSessions.jpg"
+  },
+  {
+    "id": 17,
+    "title": "Despechá",
+    "artist": "Rosalía",
+    "guess": "songs/guess/017-Rosalia-Despecha.mp3",
+    "reveal": "songs/reveal/017-Rosalia-Despecha.mp3",
+    "cover": "img/song-covers/Rosalia-Despecha.jpg"
+  },
+  {
+    "id": 18,
+    "title": "Al Golpito",
+    "artist": "Quevedo & Nueva Línea",
+    "guess": "songs/guess/018-QuevedoYNuevaLinea-AlGolpito.mp3",
+    "reveal": "songs/reveal/018-QuevedoYNuevaLinea-AlGolpito.mp3",
+    "cover": "img/song-covers/Quevedo-ElBaifo.jpg"
+  },
+  {
+    "id": 19,
+    "title": "Rayos de Sol",
+    "artist": "Jose de Rico & Henry Méndez",
+    "guess": "songs/guess/019-JoseDeRicoYHenryMendez-RayosDeSol.mp3",
+    "reveal": "songs/reveal/019-JoseDeRicoYHenryMendez-RayosDeSol.mp3",
+    "cover": "img/song-covers/JoseDeRico-RayosDeSol.jpg"
+  },
+  {
+    "id": 20,
+    "title": "Que La Detengan",
+    "artist": "David Civera",
+    "guess": "songs/guess/020-DavidCivera-QueLaDetengan.mp3",
+    "reveal": "songs/reveal/020-DavidCivera-QueLaDetengan.mp3",
+    "cover": "img/song-covers/DavidCivera-CuerpoYAlma.jpg"
+  },
+  {
+    "id": 21,
+    "title": "Bellakeo",
+    "artist": "Peso Pluma & Anitta",
+    "guess": "songs/guess/021-PesoPlumaYAnitta-Bellakeo.mp3",
+    "reveal": "songs/reveal/021-PesoPlumaYAnitta-Bellakeo.mp3",
+    "cover": "img/song-covers/PesoPluma-Bellakeo.jpg"
+  },
+  {
+    "id": 22,
+    "title": "Adán Y Eva",
+    "artist": "Paulo Londra",
+    "guess": "songs/guess/022-PauloLondra-AdanYEva.mp3",
+    "reveal": "songs/reveal/022-PauloLondra-AdanYEva.mp3",
+    "cover": "img/song-covers/PauloLondra-HomeRun.jpg"
+  },
+  {
+    "id": 23,
+    "title": "Tal Vez",
+    "artist": "Paulo Londra",
+    "guess": "songs/guess/023-PauloLondra-TalVez.mp3",
+    "reveal": "songs/reveal/023-PauloLondra-TalVez.mp3",
+    "cover": "img/song-covers/PauloLondra-HomeRun.jpg"
+  },
+  {
+    "id": 24,
+    "title": "Qué Más Pues?",
+    "artist": "J Balvin & María Becerra",
+    "guess": "songs/guess/024-JBalvinYMariaBecerra-QueMasPues.mp3",
+    "reveal": "songs/reveal/024-JBalvinYMariaBecerra-QueMasPues.mp3",
+    "cover": "img/song-covers/JBalvin-QueMasPues.jpg"
+  },
+  {
+    "id": 25,
+    "title": "Con Calma",
+    "artist": "Daddy Yankee & Snow",
+    "guess": "songs/guess/025-DaddyYankeeYSnow-ConCalma.mp3",
+    "reveal": "songs/reveal/025-DaddyYankeeYSnow-ConCalma.mp3",
+    "cover": "img/song-covers/DaddyYankee-ConCalma.jpg"
+  },
+  {
+    "id": 26,
+    "title": "DtMF (Debí Tirar Más Fotos)",
+    "artist": "Bad Bunny",
+    "guess": "songs/guess/026-BadBunny-DtMF.mp3",
+    "reveal": "songs/reveal/026-BadBunny-DtMF.mp3",
+    "cover": "img/song-covers/BadBunny-DebiTirarMasFotos.jpg"
+  },
+  {
+    "id": 27,
+    "title": "La Canción",
+    "artist": "J Balvin & Bad Bunny",
+    "guess": "songs/guess/027-JBalvinYBadBunny-LaCancion.mp3",
+    "reveal": "songs/reveal/027-JBalvinYBadBunny-LaCancion.mp3",
+    "cover": "img/song-covers/JBalvin-Oasis.jpg"
+  },
+  {
+    "id": 28,
+    "title": "Tití Me Preguntó",
+    "artist": "Bad Bunny",
+    "guess": "songs/guess/028-BadBunny-TitiMePregunto.mp3",
+    "reveal": "songs/reveal/028-BadBunny-TitiMePregunto.mp3",
+    "cover": "img/song-covers/BadBunny-UnVeranoSinTi.jpg"
+  },
+  {
+    "id": 29,
+    "title": "Ojitos Lindos",
+    "artist": "Bad Bunny & Bomba Estéreo",
+    "guess": "songs/guess/029-BadBunny-OjitosLindos.mp3",
+    "reveal": "songs/reveal/029-BadBunny-OjitosLindos.mp3",
+    "cover": "img/song-covers/BadBunny-UnVeranoSinTi.jpg"
+  },
+  {
+    "id": 30,
+    "title": "Baile Inolvidable",
+    "artist": "Bad Bunny",
+    "guess": "songs/guess/030-BadBunny-BaileInolvidable.mp3",
+    "reveal": "songs/reveal/030-BadBunny-BaileInolvidable.mp3",
+    "cover": "img/song-covers/BadBunny-DebiTirarMasFotos.jpg"
+  },
+  {
+    "id": 31,
+    "title": "Thunderstruck",
+    "artist": "AC/DC",
+    "guess": "songs/guess/031-ACDC-Thunderstruck.mp3",
+    "reveal": "songs/reveal/031-ACDC-Thunderstruck.mp3",
+    "cover": "img/song-covers/ACDC-TheRazorsEdge.jpg"
+  },
+  {
+    "id": 32,
+    "title": "Highway To Hell",
+    "artist": "AC/DC",
+    "guess": "songs/guess/032-ACDC-HighwayToHell.mp3",
+    "reveal": "songs/reveal/032-ACDC-HighwayToHell.mp3",
+    "cover": "img/song-covers/ACDC-HighwayToHell.jpg"
+  },
+  {
+    "id": 33,
+    "title": "Golden",
+    "artist": "HUNTR/X",
+    "guess": "songs/guess/033-Huntrix-Golden.mp3",
+    "reveal": "songs/reveal/033-Huntrix-Golden.mp3",
+    "cover": "img/song-covers/Huntrix-Golden.jpg"
+  },
+  {
+    "id": 34,
+    "title": "Dynamite",
+    "artist": "BTS",
+    "guess": "songs/guess/034-BTS-Dynamite.mp3",
+    "reveal": "songs/reveal/034-BTS-Dynamite.mp3",
+    "cover": "img/song-covers/BTS-Be.jpg"
+  },
+  {
+    "id": 35,
+    "title": "Swim",
+    "artist": "BTS",
+    "guess": "songs/guess/035-BTS-Swim.mp3",
+    "reveal": "songs/reveal/035-BTS-Swim.mp3",
+    "cover": "img/song-covers/BTS-Arirang.jpg"
+  },
+  {
+    "id": 36,
+    "title": "La Morocha",
+    "artist": "Luck Ra & BM",
+    "guess": "songs/guess/036-LuckRaYBM-LaMorocha.mp3",
+    "reveal": "songs/reveal/036-LuckRaYBM-LaMorocha.mp3",
+    "cover": "img/song-covers/LuckRa-LaMorocha.jpg"
+  },
+  {
+    "id": 37,
+    "title": "BZRP Music Sessions, Vol. 53",
+    "artist": "Shakira & Bizarrap",
+    "guess": "songs/guess/037-ShakiraYBizarrap-BZRPMusicSessionsVol53.mp3",
+    "reveal": "songs/reveal/037-ShakiraYBizarrap-BZRPMusicSessionsVol53.mp3",
+    "cover": "img/song-covers/Shakira-BZRPMusicSessions.jpg"
+  },
+  {
+    "id": 38,
+    "title": "Como Camarón",
+    "artist": "Estopa",
+    "guess": "songs/guess/038-Estopa-ComoCamaron.mp3",
+    "reveal": "songs/reveal/038-Estopa-ComoCamaron.mp3",
+    "cover": "img/song-covers/Estopa-Estopa.jpg"
+  },
+  {
+    "id": 39,
+    "title": "Criminal",
+    "artist": "Natti Natasha & Ozuna",
+    "guess": "songs/guess/039-NattiNatashaYOzuna-Criminal.mp3",
+    "reveal": "songs/reveal/039-NattiNatashaYOzuna-Criminal.mp3",
+    "cover": "img/song-covers/NattiNatasha-Criminal.jpg"
+  },
+  {
+    "id": 40,
+    "title": "Tusa",
+    "artist": "Karol G & Nicki Minaj",
+    "guess": "songs/guess/040-KarolGYNickiMinaj-Tusa.mp3",
+    "reveal": "songs/reveal/040-KarolGYNickiMinaj-Tusa.mp3",
+    "cover": "img/song-covers/KarolG-Tusa.jpg"
+  },
+  {
+    "id": 41,
+    "title": "TQG",
+    "artist": "Karol G & Shakira",
+    "guess": "songs/guess/041-KarolGYShakira-TQG.mp3",
+    "reveal": "songs/reveal/041-KarolGYShakira-TQG.mp3",
+    "cover": "img/song-covers/KarolG-MañanaSeraBonito.jpg"
+  },
+  {
+    "id": 42,
+    "title": "Si Antes Te Hubiera Conocido",
+    "artist": "Karol G",
+    "guess": "songs/guess/042-KarolG-SiAntesTeHubieraConocido.mp3",
+    "reveal": "songs/reveal/042-KarolG-SiAntesTeHubieraConocido.mp3",
+    "cover": "img/song-covers/KarolG-SiAntesTeHubieraConocido.jpg"
+  },
+  {
+    "id": 43,
+    "title": "Gran Vía",
+    "artist": "Quevedo & Aitana",
+    "guess": "songs/guess/043-QuevedoYAitana-GranVia.mp3",
+    "reveal": "songs/reveal/043-QuevedoYAitana-GranVia.mp3",
+    "cover": "img/song-covers/Quevedo-BuenasNoches.jpg"
+  },
+  {
+    "id": 44,
+    "title": "Corazón",
+    "artist": "Maluma",
+    "guess": "songs/guess/044-Maluma-Corazon.mp3",
+    "reveal": "songs/reveal/044-Maluma-Corazon.mp3",
+    "cover": "img/song-covers/Maluma-FAME.jpg"
+  },
+  {
+    "id": 45,
+    "title": "Hawái",
+    "artist": "Maluma",
+    "guess": "songs/guess/045-Maluma-Hawai.mp3",
+    "reveal": "songs/reveal/045-Maluma-Hawai.mp3",
+    "cover": "img/song-covers/Maluma-PapiJuancho.jpg"
+  },
+  {
+    "id": 46,
+    "title": "Tú Me Dejaste De Querer",
+    "artist": "C. Tangana, Niño de Elche, La Húngara",
+    "guess": "songs/guess/046-CTanganaYNiñoDeElcheYLaHungara-TuMeDejasteDeQuerer.mp3",
+    "reveal": "songs/reveal/046-CTanganaYNiñoDeElcheYLaHungara-TuMeDejasteDeQuerer.mp3",
+    "cover": "img/song-covers/CTangana-ElMadrileño.jpg"
+  },
+  {
+    "id": 47,
+    "title": "Ateo",
+    "artist": "C. Tangana & Nathy Peluso",
+    "guess": "songs/guess/047-CTanganaYNathyPeluso-Ateo.mp3",
+    "reveal": "songs/reveal/047-CTanganaYNathyPeluso-Ateo.mp3",
+    "cover": "img/song-covers/CTangana-ElMadrileño.jpg"
+  },
+  {
+    "id": 48,
+    "title": "1000COSAS",
+    "artist": "Lola Índigo & Manuel Turizo",
+    "guess": "songs/guess/048-LolaIndigoYManuelTurizo-1000Cosas.mp3",
+    "reveal": "songs/reveal/048-LolaIndigoYManuelTurizo-1000Cosas.mp3",
+    "cover": "img/song-covers/LolaIndigo-NaveDragon.jpg"
+  },
+  {
+    "id": 49,
+    "title": "La Reina",
+    "artist": "Lola Índigo",
+    "guess": "songs/guess/049-LolaIndigo-LaReina.mp3",
+    "reveal": "songs/reveal/049-LolaIndigo-LaReina.mp3",
+    "cover": "img/song-covers/LolaIndigo-NaveDragon.jpg"
+  },
+  {
+    "id": 50,
+    "title": "El Tonto",
+    "artist": "Lola Índigo & Quevedo",
+    "guess": "songs/guess/050-LolaIndigoYQuevedo-ElTonto.mp3",
+    "reveal": "songs/reveal/050-LolaIndigoYQuevedo-ElTonto.mp3",
+    "cover": "img/song-covers/LolaIndigo-ElDragon.jpg"
   }
 ]

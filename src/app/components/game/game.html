@@ -42,7 +42,7 @@
             class="h-full overflow-hidden mask-[linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]"
           >
             <div class="animate-carousel-down flex flex-col gap-4">
-              @for (song of carouselLeft; track song.id) {
+              @for (song of carouselLeft; track $index) {
                 <app-carousel-card [img]="song.cover" [artist]="song.artist" />
               }
             </div>
@@ -52,7 +52,7 @@
             class="h-full overflow-hidden mask-[linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]"
           >
             <div class="animate-carousel-up flex flex-col gap-4">
-              @for (song of carouselRight; track song.id) {
+              @for (song of carouselRight; track $index) {
                 <app-carousel-card [img]="song.cover" [artist]="song.artist" />
               }
             </div>
@@ -203,7 +203,7 @@
             <button
               class="flex-1 inline-flex items-center justify-center gap-3 bg-muted text-gold font-semibold uppercase font-sans tracking-wide px-6 py-3 text-base border border-gold rounded-md cursor-pointer transition-[background] duration-200 enabled:hover:bg-gold-soft/10 enabled:hover:scale-105 enabled:hover:transition-transform enabled:hover:duration-400 enabled:hover:ease disabled:cursor-not-allowed disabled:opacity-50"
               (click)="onNewSong()"
-              [disabled]="!state().showAnswer"
+              [disabled]="!state().showAnswer || !state().addScoreDisabled"
             >
               <span class="material-symbols-outlined text-2xl">keyboard_double_arrow_right</span>
               <span>Nueva canción</span>
