@@ -1,6 +1,6 @@
 @if (!rankingMode()) {
   <div
-    class="max-w-3xs sm:max-w-2xs group relative flex flex-col items-center overflow-hidden border border-gold-soft bg-background/80 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl rounded-2xl"
+    class="max-w-40 md:max-w-56 lg:max-w-2xs group relative flex flex-col items-center overflow-hidden border border-gold-soft bg-background/80 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl rounded-2xl"
     [ngClass]="tribe().hover"
   >
     <div class="w-full aspect-square overflow-hidden bg-slate-100">
@@ -13,7 +13,7 @@
 
     <div class="w-full py-3 px-4 text-center border-t border-stone-800/60 bg-stone-950/50">
       <p
-        class="text-sm md:text-base lg:text-lg font-bold text-stone-200 transition-colors group-hover:text-gold tracking-wide uppercase"
+        class="text-xs md:text-base lg:text-lg font-bold text-stone-200 transition-colors group-hover:text-gold tracking-wide uppercase"
       >
         {{ tribe().name }}
       </p>
