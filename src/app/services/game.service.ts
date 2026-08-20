@@ -253,24 +253,26 @@ export class GameService {
     this.audioService.stop();
   }
 
-  // private resetGame(): void {
-  //   this.usedSongs.set(new Set());
-  //   this.stateSignal.set({
-  //     currentSong: null,
-  //     attempt: 0,
-  //     currentRound: 1,
-  //     playSeconds: INITIAL_SECONDS,
-  //     currentTime: 0,
-  //     totalSongs: this.songs.length,
-  //     showAnswer: false,
-  //     phase: 'notInitialized',
-  //     correctAnswers: 0,
-  //     guessResult: null,
-  //     scorePanelVisible: false,
-  //     scorePanelClosing: false,
-  //     addScoreDisabled: false,
-  //   });
-  // }
+  resetGame(): void {
+    this.stopAudio();
+    this.usedSongs.set(new Set());
+    this.tribeScoresSignal.set(Object.fromEntries(TRIBES.map((tribe) => [tribe.id, 0])));
+    this.stateSignal.set({
+      currentSong: null,
+      attempt: 0,
+      currentRound: 1,
+      playSeconds: INITIAL_SECONDS,
+      currentTime: 0,
+      totalSongs: this.songs.length,
+      showAnswer: false,
+      phase: 'notInitialized',
+      correctAnswers: 0,
+      guessResult: null,
+      scorePanelVisible: false,
+      scorePanelClosing: false,
+      addScoreDisabled: false,
+    });
+  }
 
   private async playRevealSong(): Promise<void> {
     const song = this.stateSignal().currentSong;

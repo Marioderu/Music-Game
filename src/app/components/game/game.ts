@@ -46,6 +46,9 @@ export class GameComponent implements OnInit, OnDestroy {
   readonly selectedRounds = signal(5);
   readonly progress = signal(0);
   readonly search = signal('');
+  readonly showClassification = signal(false);
+  readonly rankingRevealed = signal(false);
+  readonly scoringEnabled = signal(true);
   readonly suggestions = computed(() => {
     const query = this.search().trim().toLowerCase();
 
@@ -75,8 +78,6 @@ export class GameComponent implements OnInit, OnDestroy {
 
     return state.currentRound === this.selectedRounds();
   });
-  readonly showClassification = signal(false);
-  readonly rankingRevealed = signal(false);
   readonly ranking = computed(() => {
     return this.tribes
       .map((tribe) => ({
@@ -91,8 +92,8 @@ export class GameComponent implements OnInit, OnDestroy {
   });
   readonly visibleUsedSongs = computed(() => [...this.usedSongs()].slice(-6));
   readonly hiddenUsedSongs = computed(() => Math.max(0, [...this.usedSongs()].length - 6));
-  readonly phase = computed(() => this.state().phase)
-  readonly playSeconds = computed(() => this.state().playSeconds)
+  readonly phase = computed(() => this.state().phase);
+  readonly playSeconds = computed(() => this.state().playSeconds);
 
   constructor(private gameService: GameService) {
     this.state = gameService.readState;
@@ -100,8 +101,8 @@ export class GameComponent implements OnInit, OnDestroy {
     this.usedSongs = gameService.readUsedSongs;
     this.tribeScores = gameService.tribeScores;
     this.shuffledSongs = gameService.songs.sort(() => Math.random() - 0.5);
-    const shuffledRight = this.shuffledSongs.slice(0, 6);
-    const shuffledLeft = this.shuffledSongs.slice(6, 12);
+    const shuffledRight = this.shuffledSongs.slice(0, 25);
+    const shuffledLeft = this.shuffledSongs.slice(25, 50);
     this.carouselLeft = [...shuffledLeft, ...shuffledLeft]; // TODO: CAMBIAR A (0, 25)
     this.carouselRight = [...shuffledRight, ...shuffledRight]; // TODO: CAMBIAR A (25, 50)
 
@@ -127,6 +128,18 @@ export class GameComponent implements OnInit, OnDestroy {
 
   onStartGame(): void {
     this.gameService.startGame();
+  }
+
+  onResetGame(): void {
+    this.gameService.resetGame();
+    this.stopProgress();
+    this.search.set('');
+    this.showClassification.set(false);
+    this.rankingRevealed.set(false);
+    this.progress.set(0);
+    this.scoreAnimation.set(null);
+    this.selectedRounds.set(5);
+    this.scoringEnabled.set(true);
   }
 
   onListen(): void {

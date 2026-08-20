@@ -65,8 +65,11 @@
       <div class="max-w-200 mx-auto">
         <div class="mb-2 md:mb-6">
           <p class="text-sm md:text-lg text-center px-10 font-sans">
-            Empiezas con 2 segundos. Con cada pista, sumas 2 segundos. Cuantas menos pistas, más
-            puntos ganados.
+            {{
+              scoringEnabled()
+                ? 'Empiezas con 2 segundos. Con cada pista, sumas 2 segundos. Cuantas menos pistas, más puntos ganas.'
+                : 'Empiezas con 2 segundos. Con cada pista, sumas 2 segundos. ¡Escucha, adivina y disfruta!'
+            }}
           </p>
         </div>
 
@@ -82,6 +85,41 @@
             </button>
 
             <app-round-option [(value)]="selectedRounds" />
+          </div>
+
+          <div class="flex items-center justify-center gap-3 mb-8">
+            <span
+              class="text-sm md:text-base uppercase font-semibold tracking-wide text-muted-foreground"
+            >
+              Puntuación
+            </span>
+
+            <button
+              type="button"
+              role="switch"
+              [attr.aria-checked]="scoringEnabled()"
+              (click)="scoringEnabled.set(!scoringEnabled())"
+              class="relative w-14 h-7 rounded-full border transition-all duration-300 cursor-pointer"
+              [class.bg-gold]="scoringEnabled()"
+              [class.border-gold]="scoringEnabled()"
+              [class.bg-surface-2]="!scoringEnabled()"
+              [class.border-border]="!scoringEnabled()"
+            >
+              <span
+                class="absolute top-1 left-1 size-5 rounded-full bg-foreground shadow-md transition-transform duration-300"
+                [class.translate-x-7]="scoringEnabled()"
+                [class.bg-primary-foreground]="scoringEnabled()"
+                [class.bg-muted-foreground]="!scoringEnabled()"
+              ></span>
+            </button>
+
+            <span
+              class="text-xs md:text-sm uppercase font-semibold tracking-wide min-w-8 text-left transition-colors duration-300"
+              [class.text-gold]="scoringEnabled()"
+              [class.text-muted-foreground]="!scoringEnabled()"
+            >
+              {{ scoringEnabled() ? 'Activada' : 'Desactivada' }}
+            </span>
           </div>
 
           <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -140,7 +178,7 @@
       </div>
 
       <div
-        class="relative max-w-2xl mx-auto bg-primary-foreground border border-border rounded-4xl p-4 md:p-10 z-10"
+        class="relative max-w-2xl mx-auto md:bg-primary-foreground md:border md:border-border rounded-4xl p-4 md:p-10 z-10"
       >
         <div class="grid grid-cols-3 mb-8 text-center">
           <div class="min-w-0">
@@ -202,7 +240,7 @@
             <span>{{ state().attempt === 0 ? 'Escuchar' : 'Más segundos (+2s)' }}</span>
           </button>
 
-          @if (isEndGame()) {
+          @if (isEndGame() && scoringEnabled()) {
             <button
               class="flex-1 inline-flex items-center justify-center gap-3 bg-muted text-gold font-semibold uppercase font-sans tracking-wide px-6 py-3 text-base border border-gold rounded-md cursor-pointer transition-[background] duration-200 enabled:hover:bg-gold-soft/10 enabled:hover:scale-105 enabled:hover:transition-transform enabled:hover:duration-400 enabled:hover:ease disabled:cursor-not-allowed disabled:opacity-50"
               (click)="onShowClassification()"
@@ -211,11 +249,20 @@
               <span class="material-symbols-outlined text-2xl">rewarded_ads</span>
               <span>Ver clasificación</span>
             </button>
+          } @else if (isEndGame() && !scoringEnabled()) {
+            <button
+              class="flex-1 inline-flex items-center justify-center gap-3 bg-muted text-gold font-semibold uppercase font-sans tracking-wide px-6 py-3 text-base border border-gold rounded-md cursor-pointer transition-[background] duration-200 enabled:hover:bg-gold-soft/10 enabled:hover:scale-105 enabled:hover:transition-transform enabled:hover:duration-400 enabled:hover:ease disabled:cursor-not-allowed disabled:opacity-50"
+              (click)="onResetGame()"
+              [disabled]="!state().showAnswer"
+            >
+              <span class="material-symbols-outlined text-2xl">autorenew</span>
+              <span>Volver al inicio</span>
+            </button>
           } @else {
             <button
               class="flex-1 inline-flex items-center justify-center gap-3 bg-muted text-gold font-semibold uppercase font-sans tracking-wide px-6 py-3 text-base border border-gold rounded-md cursor-pointer transition-[background] duration-200 enabled:hover:bg-gold-soft/10 enabled:hover:scale-105 enabled:hover:transition-transform enabled:hover:duration-400 enabled:hover:ease disabled:cursor-not-allowed disabled:opacity-50"
               (click)="onNewSong()"
-              [disabled]="!state().showAnswer || !state().addScoreDisabled"
+              [disabled]="!state().showAnswer || (scoringEnabled() && !state().addScoreDisabled)"
             >
               <span class="material-symbols-outlined text-2xl">keyboard_double_arrow_right</span>
               <span>Nueva canción</span>
@@ -289,27 +336,33 @@
                 </div>
 
                 <!-- Botón integrado en escritorio -->
-                <button
-                  class="hidden sm:block shrink-0 ml-4 border border-gold-soft/60 text-lg font-semibold font-sans rounded-xl text-muted-foreground w-1/3 h-full min-h-20 cursor-pointer enabled:hover:bg-gold-soft enabled:hover:border-none enabled:hover:text-primary-foreground enabled:hover:scale-105 transition-all duration-150 disabled:cursor-not-allowed disabled:opacity-40"
-                  (click)="onOpenScorePanel()"
-                  [disabled]="state().addScoreDisabled"
-                >
-                  <span class="text-gold text-xl group-enabled:group-hover:text-primary-foreground">
-                    + {{ points() }}
-                  </span>
-                  puntos
-                </button>
+                @if (scoringEnabled()) {
+                  <button
+                    class="hidden sm:block shrink-0 ml-4 border border-gold-soft/60 text-lg font-semibold font-sans rounded-xl text-muted-foreground w-1/3 h-full min-h-20 cursor-pointer enabled:hover:bg-gold-soft enabled:hover:border-none enabled:hover:text-primary-foreground enabled:hover:scale-105 transition-all duration-150 disabled:cursor-not-allowed disabled:opacity-40"
+                    (click)="onOpenScorePanel()"
+                    [disabled]="state().addScoreDisabled"
+                  >
+                    <span
+                      class="text-gold text-xl group-enabled:group-hover:text-primary-foreground"
+                    >
+                      + {{ points() }}
+                    </span>
+                    puntos
+                  </button>
+                }
               </div>
 
               <!-- Botón separado en móvil -->
-              <button
-                class="sm:hidden w-full py-2 border border-gold-soft/60 text-base font-semibold font-sans rounded-xl text-muted-foreground cursor-pointer enabled:hover:bg-gold-soft enabled:hover:border-none enabled:hover:text-primary-foreground transition-all duration-150 disabled:cursor-not-allowed disabled:opacity-40"
-                (click)="onOpenScorePanel()"
-                [disabled]="state().addScoreDisabled"
-              >
-                <span class="text-gold text-lg"> + {{ points() }} </span>
-                puntos
-              </button>
+              @if (scoringEnabled()) {
+                <button
+                  class="sm:hidden w-full py-2 border border-gold-soft/60 text-base font-semibold font-sans rounded-xl text-muted-foreground cursor-pointer enabled:hover:bg-gold-soft enabled:hover:border-none enabled:hover:text-primary-foreground transition-all duration-150 disabled:cursor-not-allowed disabled:opacity-40"
+                  (click)="onOpenScorePanel()"
+                  [disabled]="state().addScoreDisabled"
+                >
+                  <span class="text-gold text-lg"> + {{ points() }} </span>
+                  puntos
+                </button>
+              }
             </div>
           } @else {
             <button

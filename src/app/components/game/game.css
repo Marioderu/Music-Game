@@ -146,11 +146,11 @@
 }
 
 .animate-carousel-down {
-  animation: carousel-down 18s linear infinite;
+  animation: carousel-down 50s linear infinite;
 }
 
 .animate-carousel-up {
-  animation: carousel-up 24s linear infinite;
+  animation: carousel-up 75s linear infinite;
 }
 
 .points-popup {

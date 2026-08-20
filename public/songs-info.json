@@ -398,5 +398,261 @@
     "guess": "songs/guess/050-LolaIndigoYQuevedo-ElTonto.mp3",
     "reveal": "songs/reveal/050-LolaIndigoYQuevedo-ElTonto.mp3",
     "cover": "img/song-covers/LolaIndigo-ElDragon.jpg"
+  },
+  {
+    "id": 51,
+    "title": "Cielito Lindo",
+    "artist": "Pedro Infante",
+    "guess": "songs/guess/051-PedroInfante-CielitoLindo.mp3",
+    "reveal": "songs/reveal/051-PedroInfante-CielitoLindo.mp3",
+    "cover": "img/song-covers/PedroInfante-60RancherasInmortales.jpg"
+  },
+  {
+    "id": 52,
+    "title": "La Inocente",
+    "artist": "Mora & Feid",
+    "guess": "songs/guess/052-MoraYFeid-LaInocente.mp3",
+    "reveal": "songs/reveal/052-MoraYFeid-LaInocente.mp3",
+    "cover": "img/song-covers/Mora-Microdosis.jpg"
+  },
+  {
+    "id": 53,
+    "title": "Pareja Del Año",
+    "artist": "Sebastián Yatra & Myke Towers",
+    "guess": "songs/guess/053-SebastianYatraYMykeTowers-ParejaDelAño.mp3",
+    "reveal": "songs/reveal/053-SebastianYatraYMykeTowers-ParejaDelAño.mp3",
+    "cover": "img/song-covers/SebastianYatra-ParejaDelAño.jpg"
+  },
+  {
+    "id": 54,
+    "title": "Tiroteo (Remix)",
+    "artist": "Marc Seguí, Rauw Alejandro, Pol Granch",
+    "guess": "songs/guess/054-MarcSeguiYRauwAlejandroYPolGranch-TiroteoRemix.mp3",
+    "reveal": "songs/reveal/054-MarcSeguiYRauwAlejandroYPolGranch-TiroteoRemix.mp3",
+    "cover": "img/song-covers/MarcSegui-Tiroteo.jpg"
+  },
+  {
+    "id": 55,
+    "title": "Échame La Culpa",
+    "artist": "Luis Fonsi & Demi Lovato",
+    "guess": "songs/guess/055-LuisFonsiYDemiLovato-EchameLaCulpa.mp3",
+    "reveal": "songs/reveal/055-LuisFonsiYDemiLovato-EchameLaCulpa.mp3",
+    "cover": "img/song-covers/LuisFonsi-Vida.jpg"
+  },
+  {
+    "id": 56,
+    "title": "Qué Pretendes",
+    "artist": "J Balvin & Bad Bunny",
+    "guess": "songs/guess/056-JBalvinYBadBunny-QuePretendes.mp3",
+    "reveal": "songs/reveal/056-JBalvinYBadBunny-QuePretendes.mp3",
+    "cover": "img/song-covers/JBalvin-Oasis.jpg"
+  },
+  {
+    "id": 57,
+    "title": "Columbia",
+    "artist": "Quevedo",
+    "guess": "songs/guess/057-Quevedo-Columbia.mp3",
+    "reveal": "songs/reveal/057-Quevedo-Columbia.mp3",
+    "cover": "img/song-covers/Quevedo-Columbia.jpg"
+  },
+  {
+    "id": 58,
+    "title": "Felices Los 4",
+    "artist": "Maluma",
+    "guess": "songs/guess/058-Maluma-FelicesLos4.mp3",
+    "reveal": "songs/reveal/058-Maluma-FelicesLos4.mp3",
+    "cover": "img/song-covers/Maluma-FAME.jpg"
+  },
+  {
+    "id": 59,
+    "title": "Bailando",
+    "artist": "Enrique Iglesias & Gente De Zona",
+    "guess": "songs/guess/059-EnriqueIglesiasYGenteDeZona-Bailando.mp3",
+    "reveal": "songs/reveal/059-EnriqueIglesiasYGenteDeZona-Bailando.mp3",
+    "cover": "img/song-covers/EnriqueIglesias-GreatestHits.jpg"
+  },
+  {
+    "id": 60,
+    "title": "La Noche De Anoche",
+    "artist": "Bad Bunny & Rosalia",
+    "guess": "songs/guess/060-BadBunnyYRosalia-LaNocheDeAnoche.mp3",
+    "reveal": "songs/reveal/060-BadBunnyYRosalia-LaNocheDeAnoche.mp3",
+    "cover": "img/song-covers/BadBunny-ElUltimoTourDelMundo.jpg"
+  },
+  {
+    "id": 61,
+    "title": "Soltera (Remix)",
+    "artist": "Lunay & Daddy Yankee & Bad Bunny",
+    "guess": "songs/guess/061-LunayYDaddyYankeeYBadBunny-SolteraRemix.mp3",
+    "reveal": "songs/reveal/061-LunayYDaddyYankeeYBadBunny-SolteraRemix.mp3",
+    "cover": "img/song-covers/Lunay-SolteraRemix.jpg"
+  },
+  {
+    "id": 62,
+    "title": "Se Preparó",
+    "artist": "Ozuna",
+    "guess": "songs/guess/062-Ozuna-SePreparo.mp3",
+    "reveal": "songs/reveal/062-Ozuna-SePreparo.mp3",
+    "cover": "img/song-covers/Ozuna-Odisea.jpg"
+  },
+  {
+    "id": 63,
+    "title": "Ella Baila Sola",
+    "artist": "Eslabon Armado & Peso Pluma",
+    "guess": "songs/guess/063-EslabonArmadoYPesoPluma-EllaBailaSola.mp3",
+    "reveal": "songs/reveal/063-EslabonArmadoYPesoPluma-EllaBailaSola.mp3",
+    "cover": "img/song-covers/EslabonArmado-EllaBailaSola.jpg"
+  },
+  {
+    "id": 64,
+    "title": "Yonaguni",
+    "artist": "Bad Bunny",
+    "guess": "songs/guess/064-BadBunny-Yonaguni.mp3",
+    "reveal": "songs/reveal/064-BadBunny-Yonaguni.mp3",
+    "cover": "img/song-covers/BadBunny-Yonaguni.jpg"
+  },
+  {
+    "id": 65,
+    "title": "Todo De Ti",
+    "artist": "Rauw Alejandro",
+    "guess": "songs/guess/065-RauwAlejandro-TodoDeTi.mp3",
+    "reveal": "songs/reveal/065-RauwAlejandro-TodoDeTi.mp3",
+    "cover": "img/song-covers/RauwAlejandro-Viceversa.jpg"
+  },
+  {
+    "id": 66,
+    "title": "Pepas",
+    "artist": "Farruko",
+    "guess": "songs/guess/066-Farruko-Pepas.mp3",
+    "reveal": "songs/reveal/066-Farruko-Pepas.mp3",
+    "cover": "img/song-covers/Farruko-Pepas.jpg"
+  },
+  {
+    "id": 67,
+    "title": "Me Rehúso",
+    "artist": "Danny Ocean",
+    "guess": "songs/guess/067-DannyOcean-MeRehuso.mp3",
+    "reveal": "songs/reveal/067-DannyOcean-MeRehuso.mp3",
+    "cover": "img/song-covers/DannyOcean-MeRehuso.jpg"
+  },
+  {
+    "id": 68,
+    "title": "Danza Kuduro",
+    "artist": "Don Omar & Lucenzo",
+    "guess": "songs/guess/068-DonOmarYLucenzo-DanzaKuduro.mp3",
+    "reveal": "songs/reveal/068-DonOmarYLucenzo-DanzaKuduro.mp3",
+    "cover": "img/song-covers/DonOmar-MeetTheOrphans.jpg"
+  },
+  {
+    "id": 69,
+    "title": "Pa Ti Toa <3",
+    "artist": "Ana Mena & Lola Índigo",
+    "guess": "songs/guess/069-AnaMenaYLolaIndigo-PaTiToa.mp3",
+    "reveal": "songs/reveal/069-AnaMenaYLolaIndigo-PaTiToa.mp3",
+    "cover": "img/song-covers/AnaMena-PaTiToa.jpg"
+  },
+  {
+    "id": 70,
+    "title": "Tacones Rojos",
+    "artist": "Sebastián Yatra",
+    "guess": "songs/guess/070-SebastianYatra-TaconesRojos.mp3",
+    "reveal": "songs/reveal/070-SebastianYatra-TaconesRojos.mp3",
+    "cover": "img/song-covers/SebastianYatra-Dharma.jpg"
+  },
+  {
+    "id": 71,
+    "title": "Propuesta Indecente",
+    "artist": "Romeo Santos",
+    "guess": "songs/guess/071-RomeoSantos-PropuestaIndecente.mp3",
+    "reveal": "songs/reveal/071-RomeoSantos-PropuestaIndecente.mp3",
+    "cover": "img/song-covers/RomeoSantos-FormulaVol2.jpg"
+  },
+  {
+    "id": 72,
+    "title": "Eres Mía",
+    "artist": "Romeo Santos",
+    "guess": "songs/guess/072-RomeoSantos-EresMia.mp3",
+    "reveal": "songs/reveal/072-RomeoSantos-EresMia.mp3",
+    "cover": "img/song-covers/RomeoSantos-FormulaVol2.jpg"
+  },
+  {
+    "id": 73,
+    "title": "Me Niego",
+    "artist": "Reik, Ozuna, Wisin",
+    "guess": "songs/guess/073-ReikYOzunaYWisin-MeNiego.mp3",
+    "reveal": "songs/reveal/073-ReikYOzunaYWisin-MeNiego.mp3",
+    "cover": "img/song-covers/Reik-Ahora.jpg"
+  },
+  {
+    "id": 74,
+    "title": "Vagabundo",
+    "artist": "Sebastian Yatra & Manuel & Turizo & Beéle",
+    "guess": "songs/guess/074-SebastianYatraYManuelYTurizoYBeéle-Vagabundo.mp3",
+    "reveal": "songs/reveal/074-SebastianYatraYManuelYTurizoYBeéle-Vagabundo.mp3",
+    "cover": "img/song-covers/SebastianYatra-Vagabundo.jpg"
+  },
+  {
+    "id": 75,
+    "title": "La Bachata",
+    "artist": "Manuel Turizo",
+    "guess": "songs/guess/075-ManuelTurizo-LaBachata.mp3",
+    "reveal": "songs/reveal/075-ManuelTurizo-LaBachata.mp3",
+    "cover": "img/song-covers/ManuelTurizo-2000.jpg"
+  },
+  {
+    "id": 76,
+    "title": "Ella Me Levantó",
+    "artist": "Daddy Yankee",
+    "guess": "songs/guess/076-DaddyYankee-EllaMeLevanto.mp3",
+    "reveal": "songs/reveal/076-DaddyYankee-EllaMeLevanto.mp3",
+    "cover": "img/song-covers/DaddyYankee-ElCartel.jpg"
+  },
+  {
+    "id": 77,
+    "title": "Soltera",
+    "artist": "Shakira",
+    "guess": "songs/guess/077-Shakira-Soltera.mp3",
+    "reveal": "songs/reveal/077-Shakira-Soltera.mp3",
+    "cover": "img/song-covers/Shakira-Soltera.jpg"
+  },
+  {
+    "id": 78,
+    "title": "La Gozadera",
+    "artist": "Gente De Zona & Marc Anthony",
+    "guess": "songs/guess/078-GenteDeZonaYMarcAnthony-LaGozadera.mp3",
+    "reveal": "songs/reveal/078-GenteDeZonaYMarcAnthony-LaGozadera.mp3",
+    "cover": "img/song-covers/GenteDeZona-Visualizate.jpg"
+  },
+  {
+    "id": 79,
+    "title": "La Niña De La Escuela",
+    "artist": "Lola Índigo, TINI, Belinda",
+    "guess": "songs/guess/079-LolaIndigoYTINIYBelinda-LaNiñaDeLaEscuela.mp3",
+    "reveal": "songs/reveal/079-LolaIndigoYTINIYBelinda-LaNiñaDeLaEscuela.mp3",
+    "cover": "img/song-covers/LolaIndigo-LaNiña.jpg"
+  },
+  {
+    "id": 80,
+    "title": "Ave María",
+    "artist": "David Bisbal",
+    "guess": "songs/guess/080-DavidBisbal-AveMaria.mp3",
+    "reveal": "songs/reveal/080-DavidBisbal-AveMaria.mp3",
+    "cover": "img/song-covers/DavidBisbal-CorazonLatino.jpg"
+  },
+  {
+    "id": 81,
+    "title": "Bulería",
+    "artist": "David Bisbal",
+    "guess": "songs/guess/081-DavidBisbal-Buleria.mp3",
+    "reveal": "songs/reveal/081-DavidBisbal-Buleria.mp3",
+    "cover": "img/song-covers/DavidBisbal-Buleria.jpg"
+  },
+  {
+    "id": 82,
+    "title": "La Villa",
+    "artist": "Ryan Castro & Kapo & Gangsta",
+    "guess": "songs/guess/082-RyanCastroYKapoYGangsta-LaVilla.mp3",
+    "reveal": "songs/reveal/082-RyanCastroYKapoYGangsta-LaVilla.mp3",
+    "cover": "img/song-covers/RyanCastro-LaVilla.jpg"
   }
 ]
